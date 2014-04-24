@@ -2,4 +2,4 @@
 
 # User specific aliases and functions
 
-alias l = "ls -lFh"
+alias l="ls -lFh"
