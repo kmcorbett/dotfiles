@@ -44,13 +44,14 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
 ;;; Color theme
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-    ;(color-theme-hober)
-    ))
+(when (file-exists-p "~/.emacs.d/color-theme-6.6.0/color-theme.el")
+  (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
+  (require 'color-theme)
+  (eval-after-load "color-theme"
+    '(progn
+       (color-theme-initialize)
+       ;;(color-theme-hober)
+       )))
 
 ;;; 4) Modules for programming:
 ;;;    Slime
@@ -96,19 +97,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-Complete
 
-(add-to-list 'load-path "~/.emacs.d/auto-complete-1.3.1")
-(require 'auto-complete-config)
-
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-
-;; dirty fix for having Auto Complete everywhere
-(define-globalized-minor-mode real-global-auto-complete-mode
-  auto-complete-mode (lambda ()
-                       (if (not (minibufferp (current-buffer)))
-			   (auto-complete-mode 1))
-                       ))
-(real-global-auto-complete-mode t)
+(when (file-exists-p "~/.emacs.d/auto-complete-1.3.1/auto-complete-config.el")
+  (add-to-list 'load-path "~/.emacs.d/auto-complete-1.3.1")
+  (require 'auto-complete-config)
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+  (ac-config-default)
+  ;; dirty fix for having Auto Complete everywhere
+  (define-globalized-minor-mode real-global-auto-complete-mode
+      auto-complete-mode (lambda ()
+                           (if (not (minibufferp (current-buffer)))
+                               (auto-complete-mode 1))
+                           ))
+  (real-global-auto-complete-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Hooks
@@ -130,8 +130,9 @@
 ;(autoload 'vc-darcs-find-file-hook "vc-darcs")
 ;(add-hook 'find-file-hooks 'vc-darcs-find-file-hook)
 
-(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text" . markdown-mode))
+(when (file-exists-p "~/.emacs.d/markdown-mode.el")
+  (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+  (add-to-list 'auto-mode-alist '("\\.text" . markdown-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 5) startup and global flags
