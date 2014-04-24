@@ -10,3 +10,4 @@ fresh bashrc --file
 fresh profile --file
 fresh tmux.conf --file
 
+fresh ssh-config --file=.ssh/config
