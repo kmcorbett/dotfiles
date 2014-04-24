@@ -1,3 +1,10 @@
+[core]
+	pager = cat
+
 [user]
-  user.name = "Keith M Corbett"
-  user.email = "kmcorbett@gmail.com"
+	name = "Keith M Corbett"
+	email = "kmcorbett@gmail.com"
+[push]
+	default = tracking
+[github]
+	user = kmcorbett
