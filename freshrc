@@ -1,0 +1,13 @@
+# freshshell.com
+# See http://freshshell.com/readme for documentation.
+
+# Update fresh itself
+fresh freshshell/fresh bin/fresh --bin
+
+# Fresh from local .dotfiles
+fresh gitconfig --file
+fresh bashrc --file
+fresh bash_profile --file
+fresh tmux.conf --file
+fresh ssh-config --file=~/.ssh/config
+fresh emacs-init.el --file=~/.emacs.d/init.el

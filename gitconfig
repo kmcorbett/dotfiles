@@ -1,6 +1,5 @@
 [core]
 	pager = cat
-
 [user]
 	name = "Keith M Corbett"
 	email = "kmcorbett@gmail.com"

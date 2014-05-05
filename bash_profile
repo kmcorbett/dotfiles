@@ -1,10 +1,10 @@
 # .bash_profile
 
-# Source init files
+export PATH=$PATH:$HOME/bin
+
 [ -r $HOME/.bashrc ] && source $HOME/.bashrc
 [ -r $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
-# Path for shell user
-
-[ -e $HOME/bin ] && export PATH=$PATH:$HOME/bin
-
+# DropBox daemon
+DROPBOXD=$HOME/.dropbox-dist/dropboxd
+[ -f $DROPBOXD ] && $DROPBOXD

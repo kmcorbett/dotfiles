@@ -1,0 +1,7 @@
+Host github.com
+     user git
+
+Host ps76923.dreamhost.com
+     user kmcorbett
+
+Host *
