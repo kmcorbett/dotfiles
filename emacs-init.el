@@ -19,6 +19,7 @@
 ;;;; 1) Environment variables for shells
 
 (setenv "PAGER" "")
+(setenv "GIT_PAGER" "")
 (setenv "EDITOR" "emacsclient")
 
 ;;;; 2) Editing basics: enable commands and bind keys
