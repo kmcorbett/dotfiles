@@ -2,9 +2,11 @@
 
 export PATH=$PATH:$HOME/bin
 
+[ -r $HOME/.bash_profile.local ] && source $HOME/.bash_profile.local
 [ -r $HOME/.bashrc ] && source $HOME/.bashrc
-[ -r $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
 # DropBox daemon
 DROPBOXD=$HOME/.dropbox-dist/dropboxd
 [ -f $DROPBOXD ] && $DROPBOXD
+
+export EDITOR=emacs
