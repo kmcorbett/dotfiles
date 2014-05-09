@@ -15,6 +15,7 @@
 ;;; 6) Customization forms
 
 (require 'cl)
+(cd (getenv "HOME")) 
 
 ;;;; 1) Environment variables for shells
 
