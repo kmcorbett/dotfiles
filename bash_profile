@@ -1,9 +1,32 @@
 # .bash_profile
 
-export PATH=$PATH:$HOME/bin
-export EDITOR=emacs
+## Path inits
 
+# MacPorts
+[ -r /opt/local/sbin ] && export PATH=/opt/local/sbin:$PATH
+[ -r /opt/local/bin ] && export PATH=/opt/local/bin:$PATH
+
+# Mac developer
+[ -r /Developer/usr/bin ] && export PATH=/Developer/usr/bin:$PATH
+
+# Local apps
+[ -r /usr/local/git/bin ] && export PATH=/usr/local/git/bin:$PATH
+[ -r /usr/local/mysql/bin ] && export PATH=/usr/local/mysql/bin:$PATH
+
+# Personal
+[ -r $HOME/bin ] && export PATH=$HOME/bin:$PATH
+
+## Misc env
+export PS1="\h:\W\n\u\$ "
+export EDITOR=emacs
+export NAME="Keith M Corbett"
+
+## Bash inits
 [ -r $HOME/.bash_profile.local ] && source $HOME/.bash_profile.local
 [ -r $HOME/.bashrc ] && source $HOME/.bashrc
+
+## Start daemon programs
+
+# Dropbox init
 [ -r $HOME/bin/dropbox.py ] && $HOME/bin/dropbox.py start
 
