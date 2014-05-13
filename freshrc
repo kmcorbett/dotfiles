@@ -10,4 +10,9 @@ fresh bashrc --file
 fresh bash_profile --file
 fresh tmux.conf --file
 fresh ssh-config --file=~/.ssh/config-example
+
 fresh emacs-init.el --file=~/.emacs.d/init.el
+fresh lib/emacs/auto-complete-1.3.1 --file=~/.emacs.d/auto-complete-1.3.1/
+fresh lib/emacs/color-theme-6.6.0 --file=~/.emacs.d/color-theme-6.6.0/
+fresh lib/emacs/markdown-mode.el --file=~/.emacs.d/markdown-mode.el
+
