@@ -67,30 +67,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Slime
 
-;; Slime to run CCL 
-;;(setq inferior-lisp-program "ccl -K utf-8")
-
-;; Slime to run Lispworks
-;;(setq inferior-lisp-program "~/bin/lw-console")
+(setq inferior-lisp-program
+      (cond
+        ;; Leave current value alone
+        (inferior-lisp-program)
+        ;; LispWorks console image
+        ((file-exists-p "~/bin/lw-console")
+         "~/bin/lw-console")
+        ((file-exists-p "/usr/local/bin/ccl")
+         "ccl -K utf-8")
+        ((getenv "LISP"))
+        (t "lisp")))
 
 ;; Use UTF-8 character encoding
 (set-language-environment "utf-8")
 (setq slime-net-coding-system 'utf-8-unix)
 
-;;(setq inferior-lisp-program "lw-console")
-
-;; Slime from ??
-;(add-to-list 'load-path "/usr/local/clbuild/source/slime")
-;(add-to-list 'load-path "/usr/local/clbuild/source/slime/contrib")
+;; Autoloading? or loading when Emacs starts?
+;(require 'slime-autoloads)
+;(require 'slime)
 
 ;; Slime from Quicklisp
 (let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
   (when (file-exists-p slime-helper)
     (load slime-helper)))
-
-;; Autoloading? or loading when Emacs starts?
-;(require 'slime-autoloads)
-;(require 'slime)
 
 ;; Slime REPL? fancy REPL? Tramp for editing remote files?
 ;(slime-setup '(slime-repl))
