@@ -17,11 +17,22 @@
 (require 'cl)
 (cd (getenv "HOME")) 
 
+(server-start)
+
 ;;;; 1) Environment variables for shells
 
-(setenv "PAGER" "")
-(setenv "GIT_PAGER" "")
+(setenv "PAGER" "cat")
+(setenv "GIT_PAGER" "cat")
 (setenv "EDITOR" "emacsclient")
+
+;;; Unix exec path - needed for Emacs.app
+;;; Emulating the path I get in Terminal app
+(setenv "PATH" (concat "~/bin:/Developer/usr/bin:/usr/local/git/bin:"
+                       (getenv "PATH")
+                       ":/usr/local/bin"))
+(setq exec-path (append (list "~/bin" "/Developer/usr/bin" "/usr/local/git/bin")
+                        exec-path
+                        (list "/usr/local/bin")))
 
 ;;;; 2) Editing basics: enable commands and bind keys
 
