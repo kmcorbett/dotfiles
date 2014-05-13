@@ -9,6 +9,7 @@ save old dot files
 cd 
 files=".bash_profile .bashrc .gitconfig .emacs.d/init.el .tmux.conf"
 tar cvf dotfiles-archive.tar $files
+rm $files
 ```
 
 cd
