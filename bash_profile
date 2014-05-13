@@ -9,7 +9,7 @@
 # Mac developer
 [ -r /Developer/usr/bin ] && export PATH=/Developer/usr/bin:$PATH
 
-# Local apps
+# Common dev tools
 [ -r /usr/local/git/bin ] && export PATH=/usr/local/git/bin:$PATH
 [ -r /usr/local/mysql/bin ] && export PATH=/usr/local/mysql/bin:$PATH
 
