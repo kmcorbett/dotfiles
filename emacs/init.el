@@ -78,17 +78,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Slime
 
-(setq inferior-lisp-program
-      (cond
-        ;; Leave current value alone
-        (inferior-lisp-program)
-        ;; LispWorks console image
-        ((file-exists-p "~/bin/lw-console")
-         "~/bin/lw-console")
-        ((file-exists-p "/usr/local/bin/ccl")
-         "ccl -K utf-8")
-        ((getenv "LISP"))
-        (t "lisp")))
+(unless (boundp 'inferior-lisp-program)
+  (setq inferior-lisp-program
+        (cond
+          ;; LispWorks console image
+          ((file-exists-p "~/bin/lw-console")
+           "~/bin/lw-console")
+          ((file-exists-p "/usr/local/bin/ccl")
+           "ccl -K utf-8")
+          ((getenv "LISP"))
+          (t "lisp"))))
 
 ;; Use UTF-8 character encoding
 (set-language-environment "utf-8")
