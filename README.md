@@ -13,7 +13,7 @@ rm $files
 ```
 
 cd
-git clone ssh://git@github.com/kmcorbett/dotfiles .dotfiles
+git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
 ln -s ~/.dotfiles/freshrc ~/.freshrc
 bash -c "`curl -sL --insecure get.freshshell.com`"
 fresh
