@@ -15,7 +15,9 @@
 ;;; 6) Customization forms
 
 (require 'cl)
-(cd (getenv "HOME")) 
+
+(when (file-exists-p "/Applications/Emacs.app")
+  (cd (getenv "HOME")) )
 
 (server-start)
 
@@ -54,7 +56,7 @@
 
 ;;;; 3) Load paths and optional modules
 
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; Color theme
 (when (file-exists-p "~/.emacs.d/color-theme-6.6.0/color-theme.el")
@@ -142,7 +144,7 @@
 ;(autoload 'vc-darcs-find-file-hook "vc-darcs")
 ;(add-hook 'find-file-hooks 'vc-darcs-find-file-hook)
 
-(when (file-exists-p "~/.emacs.d/markdown-mode.el")
+(when (file-exists-p "~/.emacs.d/lisp/markdown-mode.el")
   (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
   (add-to-list 'auto-mode-alist '("\\.text" . markdown-mode)))
 
