@@ -14,10 +14,13 @@
 ;;; 5) Startup and global flags
 ;;; 6) Customization forms
 
-(require 'cl)
+(eval-when-compile 
+  (require 'cl))
 
-(when (file-exists-p "/Applications/Emacs.app")
-  (cd (getenv "HOME")) )
+(let ((path "/Applications/Emacs.app"))
+  (when (and (file-exists-p path)
+             (zerop (or (string-match-p (concat "^" path) invocation-directory) -1)))
+    (cd (getenv "HOME"))))
 
 (server-start)
 
