@@ -71,10 +71,10 @@
   (interactive)
   (package-refresh-contents)
   (mapc '(lambda (name)
-           (unless (package-installed-p name)
-             (package-install name)))
+          (unless (package-installed-p name)
+            (package-install name)))
         '(color-theme auto-complete markdown-mode
-                      git-commit-mode git-rebase-mode gitconfig-mode magit)))
+          git-commit-mode git-rebase-mode gitconfig-mode magit)))
 
 ;; (kmc-install-packages)
 
@@ -101,6 +101,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Slime
 
+;; Try to get Slime from Quicklisp, which takes care of Swank as well
+(let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
+  (if (file-exists-p slime-helper)
+      (load slime-helper)
+      ;; Getting Slime and Swank from Elpa? I've seen version mismatch
+      (warn "Quicklisp Slime helper not found, Slime may not work")))
+
+(require 'slime-autoloads)
+
+;; Slime REPL? fancy REPL? Tramp for editing remote files?
+;(slime-setup '(slime-repl))
+;(slime-setup '(slime-fancy slime-tramp))
+(slime-setup '(slime-fancy))
+
 (unless (boundp 'inferior-lisp-program)
   (setq inferior-lisp-program
         (cond
@@ -115,19 +129,6 @@
 ;; Use UTF-8 character encoding
 (set-language-environment "utf-8")
 (setq slime-net-coding-system 'utf-8-unix)
-
-;; Autoloading? or loading when Emacs starts?
-;(require 'slime-autoloads)
-;(require 'slime)
-
-;; Slime from Quicklisp
-(let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
-  (when (file-exists-p slime-helper)
-    (load slime-helper)))
-
-;; Slime REPL? fancy REPL? Tramp for editing remote files?
-;(slime-setup '(slime-repl))
-;(slime-setup '(slime-fancy slime-tramp))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-Complete
