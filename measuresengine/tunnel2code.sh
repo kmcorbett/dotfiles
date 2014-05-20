@@ -23,10 +23,10 @@ REMOTE_STASH_PORT=$LOCAL_STASH_PORT
 
 # VPN ssh server must be accessible locally (presumably over VPN) and
 #  must have access to the remote code host.
-#VPNSSHSERVER_IP=10.48.20.12
-#VPNSSHSERVER_USER=kcorbett
-VPNSSHSERVER_IP=192.168.67.119
-VPNSSHSERVER_USER=crucible
+#VPNSSHSERVER_IP=192.168.67.119
+#VPNSSHSERVER_USER=crucible
+VPNSSHSERVER_IP=10.48.20.12
+VPNSSHSERVER_USER=kcorbett
 
 # Use RSA private key if found
 # Deliberately uses $HOME to find key for effective user before 'sudo'
@@ -43,6 +43,7 @@ IFCONFIG_DOWN=
 if [ ! -e "/private/etc/hosts" ] ; then
     echo "On Linux"
     LOCAL_REDIRECT_IP=$VPNSSHSERVER_IP
+    LOCAL_IP=127.0.0.42
     TUNNEL1="$LOCAL_HTTPS_PORT:$CODEHOST_IP:$REMOTE_HTTPS_PORT"
     TUNNEL2="$LOCAL_STASH_PORT:$CODEHOST_IP:$REMOTE_STASH_PORT"
     IFCONFIG_UP="ifconfig lo:1 $LOCAL_IP"

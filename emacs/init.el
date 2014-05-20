@@ -22,8 +22,6 @@
              (zerop (or (string-match-p (concat "^" path) invocation-directory) -1)))
     (cd (getenv "HOME"))))
 
-(server-start)
-
 ;;;; 1) Environment variables for shells
 
 (setenv "PAGER" "cat")
@@ -57,19 +55,24 @@
 (define-key global-map "\M-(" 'insert-parentheses)
 (define-key global-map "\M-+" 'tags-loop-continue)
 
-;;;; 3) Load paths and optional modules
+;;;; 3) Load paths and optional packages
 
+(require 'package)
+
+;;; Melba package repo 
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;;; Local scripts
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; Color theme
-(when (file-exists-p "~/.emacs.d/color-theme-6.6.0/color-theme.el")
-  (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-  (require 'color-theme)
-  (eval-after-load "color-theme"
-    '(progn
-       (color-theme-initialize)
-       ;;(color-theme-hober)
-       )))
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+    (color-theme-initialize)
+    ;;(color-theme-hober)
+    ))
 
 ;;; 4) Modules for programming:
 ;;;    Slime
@@ -114,18 +117,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-Complete
 
-(when (file-exists-p "~/.emacs.d/auto-complete-1.3.1/auto-complete-config.el")
-  (add-to-list 'load-path "~/.emacs.d/auto-complete-1.3.1")
-  (require 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-  (ac-config-default)
-  ;; dirty fix for having Auto Complete everywhere
-  (define-globalized-minor-mode real-global-auto-complete-mode
-      auto-complete-mode (lambda ()
-                           (if (not (minibufferp (current-buffer)))
-                               (auto-complete-mode 1))
-                           ))
-  (real-global-auto-complete-mode t))
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+;; Dirty fix for having Auto Complete everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+    auto-complete-mode (lambda ()
+                         (if (not (minibufferp (current-buffer)))
+                             (auto-complete-mode 1))
+                         ))
+(real-global-auto-complete-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Hooks
@@ -147,9 +148,13 @@
 ;(autoload 'vc-darcs-find-file-hook "vc-darcs")
 ;(add-hook 'find-file-hooks 'vc-darcs-find-file-hook)
 
-(when (file-exists-p "~/.emacs.d/lisp/markdown-mode.el")
-  (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-  (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)))
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+;;; Git
+(require 'git-commit-mode)
+(require 'git-rebase-mode)
+(require 'magit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 5) startup and global flags
@@ -157,6 +162,8 @@
 (setq inhibit-startup-message t)
 (setq visible-bell t)
 (display-time)
+
+(server-start)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 6) Customization
