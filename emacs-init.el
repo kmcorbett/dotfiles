@@ -57,13 +57,14 @@
 
 ;;;; 3) Load paths and optional packages
 
+;;; Use Melba package repo 
 (require 'package)
-
-;;; Melba package repo 
+(setq package-user-dir "~/.emacs.d/elpa/")
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
-;;; Local scripts
+;; Local scripts
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; Color theme

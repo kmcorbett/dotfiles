@@ -11,7 +11,7 @@ fresh tmux.conf --file
 fresh ssh-config --file=~/.ssh/config-example
 
 # Emacs
-fresh emacs/init.el --file=~/.emacs.d/init.el
+fresh emacs-init.el --file=~/.emacs.d/init.el
 
 # Git config 
 # Some global git config settings vary per host
