@@ -17,7 +17,7 @@ fresh emacs/init.el --file=~/.emacs.d/init.el
 # Some global git config settings vary per host
 # TODO: Assemble from parts?
 # fresh gitconfig --file
-fresh gitconfig --file=~/gitconfig-example
+fresh gitconfig --file=~/.gitconfig-kmc
 
 # Verisk inits
 # TODO: separate repo?
