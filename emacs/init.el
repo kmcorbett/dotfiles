@@ -149,7 +149,7 @@
 
 (when (file-exists-p "~/.emacs.d/lisp/markdown-mode.el")
   (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-  (add-to-list 'auto-mode-alist '("\\.text" . markdown-mode)))
+  (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 5) startup and global flags
