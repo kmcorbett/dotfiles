@@ -57,14 +57,28 @@
 
 ;;;; 3) Load paths and optional packages
 
-;;; Use Melba package repo 
 (require 'package)
+
+;;; Use Melpa package repo 
 (setq package-user-dir "~/.emacs.d/elpa/")
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 (package-initialize)
 
-;; Local scripts
+;;; Utility to install my favorite packages
+(defun kmc-install-packages ()
+  (interactive)
+  (package-refresh-contents)
+  (mapc '(lambda (name)
+           (unless (package-installed-p name)
+             (package-install name)))
+        '(color-theme auto-complete markdown-mode
+                      git-commit-mode git-rebase-mode gitconfig-mode magit)))
+
+;; (kmc-install-packages)
+
+;;; Local scripts
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; Color theme
@@ -130,7 +144,7 @@
 (real-global-auto-complete-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Hooks
+;;; Modes and Hooks
 ;;;
 
 ;;; PHP
