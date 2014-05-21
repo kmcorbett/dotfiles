@@ -21,6 +21,18 @@
     $ ln -s ~/.dotfiles/freshrc ~/.freshrc
     $ fresh
 
+## Freshen dotfiles 2nd and more times
+
+### Fresh every time
+
+    $ fresh
+
+### (Re)Fresh from Github
+
+    $ fresh update
+
+## Fresh miscellany
+
 ### Fresh Quicklisp
 
     $ cd
@@ -30,13 +42,10 @@
     ? (quicklisp-quickstart:install)
     ? (ql:quickload "quicklisp-slime-helper")
 
-### Fresh every time
+Next time:
 
-    $ fresh
-
-### (Re)Fresh from Github
-
-    $ fresh update
+    $ ccl
+    ? (load "~/quicklisp/setup.lisp")
     
 ### Freshen file modes
 

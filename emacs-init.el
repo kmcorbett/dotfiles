@@ -28,14 +28,24 @@
 (setenv "GIT_PAGER" "cat")
 (setenv "EDITOR" "emacsclient")
 
-;;; Unix exec path - needed for Emacs.app
-;;; Emulating the path I get in Terminal app
-(setenv "PATH" (concat "~/bin:/Developer/usr/bin:/usr/local/git/bin:"
-                       (getenv "PATH")
-                       ":/usr/local/bin"))
-(setq exec-path (append (list "~/bin" "/Developer/usr/bin" "/usr/local/git/bin")
-                        exec-path
-                        (list "/usr/local/bin")))
+;;; PATH setup - some for Mac OS X - emulating PATH in Terminal app
+(defvar kmc-extra-paths
+  `("~/bin" "/Developer/usr/bin" "/usr/local/git/bin" "/usr/local/bin"))
+
+(setenv "PATH"
+        (mapconcat
+         'identity
+         (delete-dups
+          (append
+           (mapcar (lambda (path)
+                     (if (string-match "^~" path)
+                         (replace-match (getenv "HOME") nil nil path)
+                         path))
+                   kmc-extra-paths)
+           (split-string (getenv "PATH") ":")))
+         ":"))
+
+(mapc (lambda (path) (push path exec-path)) kmc-extra-paths)
 
 ;;;; 2) Editing basics: enable commands and bind keys
 
@@ -63,7 +73,8 @@
 
 (defvar kmc-packages-list 
   '(color-theme auto-complete markdown-mode
-    git-commit-mode git-rebase-mode gitconfig-mode magit))
+    git-commit-mode git-rebase-mode gitconfig-mode magit
+    slime))
 
 (defun kmc-install-packages (&optional refresh-p)
   (interactive)
@@ -75,12 +86,19 @@
   (when refresh-p
     (package-refresh-contents))
   ;; Maybe install each package
-  (mapc '(lambda (name)
-          (unless (package-installed-p name)
-            (package-install name)))
+  (mapc #'(lambda (name)
+            (unless (package-installed-p name)
+              (package-install name)))
         kmc-packages-list))
 
 (kmc-install-packages)
+
+;; Prefer to get Slime from Elpa, but if skipped or failed try Quicklisp
+(unless (package-installed-p 'slime)
+  (let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
+    (if (file-exists-p slime-helper)
+        (load slime-helper)
+        (warn "Quicklisp Slime helper not found, Slime may not work"))))
 
 ;;; Local scripts
 (add-to-list 'load-path "~/.emacs.d/lisp/")
@@ -103,14 +121,7 @@
 (setq lisp-indent-function 'common-lisp-indent-function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Slime
-
-;; Try to get Slime from Quicklisp, which takes care of Swank as well
-(let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
-  (if (file-exists-p slime-helper)
-      (load slime-helper)
-      ;; Getting Slime and Swank from Elpa? I've seen version mismatch
-      (warn "Quicklisp Slime helper not found, Slime may not work")))
+;;; SLIME setup
 
 (require 'slime-autoloads)
 
@@ -119,16 +130,10 @@
 ;(slime-setup '(slime-fancy slime-tramp))
 (slime-setup '(slime-fancy))
 
-(setq inferior-lisp-program
-      (cond
-        ;; LispWorks console image
-        ((file-exists-p "~/bin/lw-console")
-         "~/bin/lw-console")
-        ((or (file-exists-p "/usr/local/bin/ccl")
-             (file-exists-p "~/bin/ccl"))
-         "ccl -K utf-8")
-        ((getenv "LISP"))
-        (t "lisp")))
+(setq slime-lisp-implementations
+      `((lw-console ("lw-console") :directory ,(or (getenv "DT_HOME")(getenv "HOME")))
+        (lispworks ("lispworks-6-1-0-amd64-linux"))
+        (ccl ("ccl" "-K" "utf-8") :coding-system utf-8-unix)))
 
 ;; Use UTF-8 character encoding
 (set-language-environment "utf-8")
@@ -184,7 +189,7 @@
 (setq visible-bell t)
 (display-time)
 
-(server-start)
+(ignore-errors (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 6) Customization
@@ -222,3 +227,13 @@
  '(slime-repl-output-face ((t (:inherit font-lock-string-face :foreground "#440044"))))
  '(slime-repl-prompt-face ((t (:inherit font-lock-keyword-face :foreground "#0022AA"))))
  '(slime-repl-result-face ((t (:foreground "darkgreen")))))
+
+(when (file-exists-p "~/.emacs.d/local.el")
+  (load-file "~/.emacs.d/local.el"))
+
+;;; init.el ends here
+
+;; Local Variables:
+;; time-stamp-start: "Updated: +"
+;; time-stamp-end: "$"
+;; End:
