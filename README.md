@@ -5,7 +5,7 @@
 ### Archive before Fresh
 
     $ cd
-    $ files=".bash_profile .bashrc .emacs.d/init.el .tmux.conf .ccl-init.lisp"
+    $ files=".signature .bash_profile .bashrc .emacs.d/init.el .tmux.conf .ccl-init.lisp"
     $ tar cvf dotfiles-archive.tar $files
     $ rm $files
 

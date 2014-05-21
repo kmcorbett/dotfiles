@@ -7,6 +7,7 @@ fresh freshshell/fresh bin/fresh --bin
 # Fresh from local .dotfiles
 fresh bashrc --file
 fresh bash_profile --file
+fresh signature --file
 fresh tmux.conf --file
 fresh ssh-config --file=~/.ssh/config-example
 
