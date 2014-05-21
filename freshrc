@@ -10,6 +10,9 @@ fresh bash_profile --file
 fresh tmux.conf --file
 fresh ssh-config --file=~/.ssh/config-example
 
+fresh ccl-init.lisp --file
+fresh quicklisp-init.lisp --file=~/.ccl-init/quicklisp-init.lisp
+
 # Emacs
 fresh emacs-init.el --file=~/.emacs.d/init.el
 
