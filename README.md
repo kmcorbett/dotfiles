@@ -4,8 +4,8 @@
 
 ### Archive before Fresh
 
-    $ cd 
-    $ files=".bash_profile .bashrc .emacs.d/init.el .tmux.conf"
+    $ cd
+    $ files=".bash_profile .bashrc .emacs.d/init.el .tmux.conf .ccl-init.lisp"
     $ tar cvf dotfiles-archive.tar $files
     $ rm $files
 
@@ -16,6 +16,7 @@
 
 ### Fresh for the first time
 
+    $ cd
     $ bash -c "`curl -sL --insecure get.freshshell.com`"
     $ ln -s ~/.dotfiles/freshrc ~/.freshrc
     $ fresh
