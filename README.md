@@ -1,21 +1,42 @@
-dotfiles
-========
+# kmcorbett/dotfiles
 
-my fresh dot files
+## Fresh dotfiles installation
 
-save old dot files
+### Archive before Fresh
 
-``` 
-cd 
-files=".bash_profile .bashrc .gitconfig .emacs.d/init.el .tmux.conf"
-tar cvf dotfiles-archive.tar $files
-rm $files
-```
+    $ cd 
+    $ files=".bash_profile .bashrc .emacs.d/init.el .tmux.conf"
+    $ tar cvf dotfiles-archive.tar $files
+    $ rm $files
 
-cd
-git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
-ln -s ~/.dotfiles/freshrc ~/.freshrc
-bash -c "`curl -sL --insecure get.freshshell.com`"
-fresh
-```
+### Fresh from Github
 
+    $ cd
+    $ git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
+
+### Fresh for the first time
+
+    $ bash -c "`curl -sL --insecure get.freshshell.com`"
+    $ ln -s ~/.dotfiles/freshrc ~/.freshrc
+    $ fresh
+
+### Fresh Quicklisp
+
+    $ cd
+    $ curl -O http://beta.quicklisp.org/quicklisp.lisp
+    $ ccl
+    ? (load "~/quicklisp.lisp")
+    ? (quicklisp-quickstart:install)
+    ? (ql:quickload "quicklisp-slime-helper")
+
+### Fresh every time
+
+    $ fresh
+
+### (Re)Fresh from Github
+
+    $ fresh update
+    
+### Freshen file modes
+
+    $ chmod +x ~/bin/tunnel2code.sh

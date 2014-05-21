@@ -65,19 +65,20 @@
   '(color-theme auto-complete markdown-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit))
 
-(defun kmc-install-packages (&optional install-p)
+(defun kmc-install-packages (&optional refresh-p)
   (interactive)
   ;; Use Melpa package repo 
   (setq package-user-dir "~/.emacs.d/elpa/")
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize)
-  (when install-p
-    (package-refresh-contents)
-    (mapc '(lambda (name)
-            (unless (package-installed-p name)
-              (package-install name)))
-          kmc-packages-list)))
+  (when refresh-p
+    (package-refresh-contents))
+  ;; Maybe install each package
+  (mapc '(lambda (name)
+          (unless (package-installed-p name)
+            (package-install name)))
+        kmc-packages-list))
 
 (kmc-install-packages)
 
@@ -118,16 +119,16 @@
 ;(slime-setup '(slime-fancy slime-tramp))
 (slime-setup '(slime-fancy))
 
-(unless (boundp 'inferior-lisp-program)
-  (setq inferior-lisp-program
-        (cond
-          ;; LispWorks console image
-          ((file-exists-p "~/bin/lw-console")
-           "~/bin/lw-console")
-          ((file-exists-p "/usr/local/bin/ccl")
-           "ccl -K utf-8")
-          ((getenv "LISP"))
-          (t "lisp"))))
+(setq inferior-lisp-program
+      (cond
+        ;; LispWorks console image
+        ((file-exists-p "~/bin/lw-console")
+         "~/bin/lw-console")
+        ((or (file-exists-p "/usr/local/bin/ccl")
+             (file-exists-p "~/bin/ccl"))
+         "ccl -K utf-8")
+        ((getenv "LISP"))
+        (t "lisp")))
 
 ;; Use UTF-8 character encoding
 (set-language-environment "utf-8")
@@ -169,6 +170,7 @@
 
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+(setq markdown-command "~/bin/Markdown.pl")
 
 ;;; Git
 (require 'git-commit-mode)
@@ -198,7 +200,6 @@
  '(gud-gdb-command-name "gdb --annotate=1")
  '(indent-tabs-mode nil)
  '(large-file-warning-threshold nil)
- '(markdown-command "~/bin/Markdown.pl")
  '(mode-require-final-newline (quote ask))
  '(require-final-newline (quote ask))
  '(safe-local-variable-values (quote ((indent-tabs) (Package . YB) (Package . GUI) (indent-tabs-mode) (Package . utils) (Package . HUNCHENTOOT) (Syntax . COMMON-LISP) (Package . CL-USER) (Package . CCL) (Syntax . ANSI-Common-Lisp) (Base . 10))))
