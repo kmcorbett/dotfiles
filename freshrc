@@ -22,12 +22,18 @@ fresh bin/Markdown.pl --file=~/bin/Markdown.pl
 
 # Git 
 # Some global git config settings vary per host
-# TODO: Assemble from parts?
-# fresh gitconfig --file
-fresh gitconfig --file=~/.gitconfig-kmc
+fresh-options --file=~/.gitconfig
+  fresh git/gitconfig.$(hostname -s) --ignore-missing
+  fresh git/gitconfig
+fresh-options
 
 # Verisk inits
 # TODO: separate repo?
 fresh measuresengine/dtinit --file=~/.dtinit
 fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
 
+
+fresh_after_build() {
+    chmod +x ~/bin/tunnel2code.sh
+    git config --global --list
+}
