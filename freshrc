@@ -32,8 +32,8 @@ fresh-options
 fresh measuresengine/dtinit --file=~/.dtinit
 fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
 
-
 fresh_after_build() {
     chmod +x ~/bin/tunnel2code.sh
+    echo "Git config global:"
     git config --global --list
 }
