@@ -72,7 +72,7 @@
 ;;; Utility to install my favorite packages
 
 (defvar kmc-packages-list 
-  '(color-theme auto-complete markdown-mode
+  '(color-theme auto-complete markdown-mode pandoc
     git-commit-mode git-rebase-mode gitconfig-mode magit
     slime))
 
@@ -176,6 +176,10 @@
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 (setq markdown-command "~/bin/Markdown.pl")
+
+(require 'pandoc-mode)
+(add-hook 'markdown-mode-hook 'turn-on-pandoc)
+(add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
 
 ;;; Git
 (require 'git-commit-mode)
