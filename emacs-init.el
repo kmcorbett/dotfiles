@@ -69,19 +69,21 @@
 
 (require 'package)
 
-;;; Utility to install my favorite packages
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+;;; Utility to install some packages
 
 (defvar kmc-packages-list 
-  '(color-theme auto-complete markdown-mode pandoc
+  '(color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    slime))
+    slime clojure-mode clojure-cheatsheet))
 
 (defun kmc-install-packages (&optional refresh-p)
   (interactive)
   ;; Use Melpa package repo 
   (setq package-user-dir "~/.emacs.d/elpa/")
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize)
   (when refresh-p
     (package-refresh-contents))
