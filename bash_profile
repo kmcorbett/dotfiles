@@ -25,6 +25,9 @@ export NAME="Keith M Corbett"
 [ -r $HOME/.bash_profile.local ] && source $HOME/.bash_profile.local
 [ -r $HOME/.bashrc ] && source $HOME/.bashrc
 
+## Boxen
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
 ## Start daemon programs
 
 # Dropbox init
