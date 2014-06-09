@@ -72,7 +72,7 @@
 ;;; Utility to install my favorite packages
 
 (defvar kmc-packages-list 
-  '(color-theme auto-complete markdown-mode pandoc
+  '(color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
     slime))
 
