@@ -67,14 +67,16 @@
 
 ;;;; 3) Load paths and optional packages
 
-(require 'package)
+;;; Local scripts
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
-;;; Utility to install my favorite packages
+;;; Package manager
+(require 'package)
 
 (defvar kmc-packages-list 
   '(color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    slime))
+    paredit clojure-mode slime))
 
 (defun kmc-install-packages (&optional refresh-p)
   (interactive)
@@ -92,16 +94,6 @@
         kmc-packages-list))
 
 (kmc-install-packages)
-
-;; Prefer to get Slime from Elpa, but if skipped or failed try Quicklisp
-(unless (package-installed-p 'slime)
-  (let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
-    (if (file-exists-p slime-helper)
-        (load slime-helper)
-        (warn "Quicklisp Slime helper not found, Slime may not work"))))
-
-;;; Local scripts
-(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; Color theme
 (require 'color-theme)
@@ -122,6 +114,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; SLIME setup
+
+;; Prefer to get Slime from Elpa, but if skipped or failed try Quicklisp
+(unless (package-installed-p 'slime)
+  (let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
+    (if (file-exists-p slime-helper)
+        (load slime-helper)
+        (warn "Quicklisp Slime helper not found, Slime may not work"))))
 
 (require 'slime-autoloads)
 
@@ -157,26 +156,26 @@
 ;;; Modes and Hooks
 ;;;
 
-;;; PHP
-;(load-file "~/.emacs.d/php-mode-1.5.0/php-mode.el")
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-(setq text-mode-hook 'turn-on-auto-fill)
-;;(setq emacs-lisp-mode-hook 'turn-on-auto-fill)
-;;(setq lisp-mode-hook 'turn-on-auto-fill)
+;;; Lisp
+(require 'lisp-mode)
+(add-hook 'lisp-mode-hook 'paredit-mode)
 
-;; Verisk CIF files
+;;; Clojure
+(require 'clojure-mode)
+(add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
+(add-hook 'clojure-mode-hook 'paredit-mode)
+
+;;; Verisk CIF files
 (add-to-list 'magic-mode-alist '(".*:properties.*:cif-version" . text-mode))
 
-;;; Darcs
-;(load-file "~/.emacs.d/vc-darcs.el")
-;(add-to-list 'vc-handled-backends 'DARCS)
-;(autoload 'vc-darcs-find-file-hook "vc-darcs")
-;(add-hook 'find-file-hooks 'vc-darcs-find-file-hook)
-
+;;; Markdown
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 (setq markdown-command "~/bin/Markdown.pl")
 
+;;; Pandoc for translating Markdown to HTML etc
 (require 'pandoc-mode)
 (add-hook 'markdown-mode-hook 'turn-on-pandoc)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
