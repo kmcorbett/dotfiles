@@ -1,9 +1,8 @@
-#!/bin/sh
+# dtinit
 
 # Initialize environment for DT relative to current directory
+# Usage: source .dtinit
 
-dir=`pwd`
-
-export DT_HOME=$dir/
+export DT_HOME=`pwd`/
 export LD_LIBRARY_PATH=${DT_HOME}lib:${LD_LIBRARY_PATH_DEFAULT}
-export DT_MB=$dir/metabase
+export DT_MB=${DT_HOME}metabase
