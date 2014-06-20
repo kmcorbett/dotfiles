@@ -13,6 +13,9 @@
 [ -r /usr/local/git/bin ] && export PATH=/usr/local/git/bin:$PATH
 [ -r /usr/local/mysql/bin ] && export PATH=/usr/local/mysql/bin:$PATH
 
+# Boxen setup
+[ -r /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
 # Personal
 [ -r $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
@@ -29,4 +32,3 @@ export NAME="Keith M Corbett"
 
 # Dropbox init
 [ -r $HOME/bin/dropbox.py ] && $HOME/bin/dropbox.py start
-

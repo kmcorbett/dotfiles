@@ -1,0 +1,38 @@
+# .bash_profile.local
+
+# Identity
+export EMAIL="kcorbett@veriskhealth.com"
+
+# Berkeley DB setup
+export CPPFLAGS=-I/usr/local/BerkeleyDB.5.3/include
+export LDFLAGS=-L/usr/local/BerkeleyDB.5.3/lib
+export LD_PRELOAD=/usr/local/BerkeleyDB.5.3/lib/libdb-5.3.so
+export LD_LIBRARY_PATH_DB=/usr/local/BerkeleyDB.5.3/lib
+
+### Oracle
+export LD_LIBRARY_PATH_ORACLE="/usr/lib/oracle/11.2/client64/lib"
+
+# DT setup
+export LISP=$HOME/bin/lw-console
+export DT_LISP=$HOME/bin/lw-console
+export REPO="https://isoscmsvnp1.iso.com/svn/veriskhealth/projects/UnifiedPlatform/RulesEngine/"
+
+export DT_DEFAULT_HOME=${HOME}/Projects/vhpea-measures-engine
+if [ -e  "${DT_DEFAULT_HOME}" ]; then
+   export DT_HOME=${DT_DEFAULT_HOME}/
+   export LD_LIBRARY_PATH=${DT_HOME}lib:${LD_LIBRARY_PATH_DEFAULT}
+   export DT_MB=${DT_HOME}metabase
+fi
+
+# Default LD library path
+export LD_LIBRARY_PATH_DEFAULT=${LD_LIBRARY_PATH_DB}:${LD_LIBRARY_PATH_ORACLE}
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH_DEFAULT}
+
+# Maven
+export MVN_HOME=/usr/local/apache-maven/apache-maven-3.2.1
+export PATH=$MVN_HOME/bin:$PATH
+
+# Java
+#export JAVA_HOME=/opt/jdk1.7.0_60
+#export JRE_HOME=${JAVA_HOME}/jre
+#export PATH=$PATH:${JAVA_HOME}/bin:${JRE_HOME}/bin
