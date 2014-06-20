@@ -4,9 +4,15 @@
 # Update fresh itself
 fresh freshshell/fresh bin/fresh --bin
 
-# Fresh from local .dotfiles
-fresh bashrc --file
-fresh bash_profile --file
+# Bash inits
+fresh home/bashrc --file
+fresh home/bash_profile --file
+
+# Optional per-host local bash profile
+fresh-options --file=~/.bash_profile.local
+  fresh home/bash_profile.$(hostname -s) --ignore-missing
+fresh-options
+
 fresh signature --file
 fresh tmux.conf --file
 fresh ssh-config --file=~/.ssh/config-example
@@ -23,17 +29,17 @@ fresh bin/Markdown.pl --file=~/bin/Markdown.pl
 # Git 
 # Some global git config settings vary per host
 fresh-options --file=~/.gitconfig
-  fresh git/gitconfig.$(hostname -s) --ignore-missing
   fresh git/gitconfig
+  fresh git/gitconfig.$(hostname -s) --ignore-missing
 fresh-options
 
 # Verisk inits
-# TODO: separate repo?
 fresh measuresengine/dtinit --file=~/.dtinit
 fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
 
 fresh_after_build() {
     chmod +x ~/bin/tunnel2code.sh
-    echo "Git config global:"
-    git config --global --list
+    echo "++ Git config global user:"
+    git config --global --get user.name
+    git config --global --get user.email
 }
