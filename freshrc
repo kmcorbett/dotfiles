@@ -13,10 +13,12 @@ fresh-options --file=~/.bash_profile.local
   fresh home/bash_profile.$(hostname -s) --ignore-missing
 fresh-options
 
-fresh signature --file
-fresh tmux.conf --file
+fresh home/signature --file
+fresh home/tmux.conf --file
+
 fresh ssh-config --file=~/.ssh/config-example
 
+# CCL
 fresh ccl-init.lisp --file
 fresh quicklisp-init.lisp --file=~/.ccl-init/quicklisp-init.lisp
 
