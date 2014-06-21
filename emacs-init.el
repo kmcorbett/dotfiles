@@ -1,6 +1,6 @@
 ;;;; -*- Mode: Emacs-Lisp; tab-width: 2; indent-tabs-mode: nil -*-
 
-;;; kmcorbett's all-purpose, singing and dancing Emacs init file!
+;;; My all-purpose, singing and dancing Emacs init file! [kmcorbett@gmail.com]
 ;;; 1) Environment variables for shells
 ;;; 2) Editing basics: enable commands and bind keys
 ;;; 3) Load paths and optional modules
@@ -29,7 +29,7 @@
 (setenv "EDITOR" "emacsclient")
 
 ;;; PATH setup - some for Mac OS X - emulating PATH in Terminal app
-(defvar kmc-extra-paths
+(defvar my-path-directories
   `("~/bin" "/Developer/usr/bin" "/usr/local/git/bin" "/usr/local/bin"))
 
 (setenv "PATH"
@@ -41,11 +41,11 @@
                      (if (string-match "^~" path)
                          (replace-match (getenv "HOME") nil nil path)
                          path))
-                   kmc-extra-paths)
+                   my-path-directories)
            (split-string (getenv "PATH") ":")))
          ":"))
 
-(mapc (lambda (path) (push path exec-path)) kmc-extra-paths)
+(mapc (lambda (path) (push path exec-path)) my-path-directories)
 
 ;;;; 2) Editing basics: enable commands and bind keys
 
@@ -67,20 +67,25 @@
 
 ;;;; 3) Load paths and optional packages
 
+;;; Local scripts
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;;; Package manager
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
-;;; Utility to install some packages
+;;; Packages I use
 
-(defvar kmc-packages-list 
+(defvar my-packages-list 
   '(color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    slime clojure-mode clojure-cheatsheet))
+    slime paredit 
+    clojure-mode clojure-cheatsheet))
 
-(defun kmc-install-packages (&optional refresh-p)
+(defun install-my-packages (&optional refresh-p)
   (interactive)
   ;; Use Melpa package repo 
   (setq package-user-dir "~/.emacs.d/elpa/")
@@ -91,19 +96,9 @@
   (mapc #'(lambda (name)
             (unless (package-installed-p name)
               (package-install name)))
-        kmc-packages-list))
+        my-packages-list))
 
-(kmc-install-packages)
-
-;; Prefer to get Slime from Elpa, but if skipped or failed try Quicklisp
-(unless (package-installed-p 'slime)
-  (let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
-    (if (file-exists-p slime-helper)
-        (load slime-helper)
-        (warn "Quicklisp Slime helper not found, Slime may not work"))))
-
-;;; Local scripts
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(install-my-packages)
 
 ;;; Color theme
 (require 'color-theme)
@@ -124,6 +119,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; SLIME setup
+
+;; Prefer to get Slime from Elpa, but if skipped or failed try Quicklisp
+(unless (package-installed-p 'slime)
+  (let ((slime-helper (expand-file-name "~/quicklisp/slime-helper.el")))
+    (if (file-exists-p slime-helper)
+        (load slime-helper)
+        (warn "Quicklisp Slime helper not found, Slime may not work"))))
 
 (require 'slime-autoloads)
 
@@ -159,26 +161,26 @@
 ;;; Modes and Hooks
 ;;;
 
-;;; PHP
-;(load-file "~/.emacs.d/php-mode-1.5.0/php-mode.el")
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-(setq text-mode-hook 'turn-on-auto-fill)
-;;(setq emacs-lisp-mode-hook 'turn-on-auto-fill)
-;;(setq lisp-mode-hook 'turn-on-auto-fill)
+;;; Lisp
+(require 'lisp-mode)
+(add-hook 'lisp-mode-hook 'paredit-mode)
 
-;; Verisk CIF files
+;;; Clojure
+(require 'clojure-mode)
+(add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
+(add-hook 'clojure-mode-hook 'paredit-mode)
+
+;;; Verisk CIF files
 (add-to-list 'magic-mode-alist '(".*:properties.*:cif-version" . text-mode))
 
-;;; Darcs
-;(load-file "~/.emacs.d/vc-darcs.el")
-;(add-to-list 'vc-handled-backends 'DARCS)
-;(autoload 'vc-darcs-find-file-hook "vc-darcs")
-;(add-hook 'find-file-hooks 'vc-darcs-find-file-hook)
-
+;;; Markdown
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 (setq markdown-command "~/bin/Markdown.pl")
 
+;;; Pandoc for translating Markdown to HTML etc
 (require 'pandoc-mode)
 (add-hook 'markdown-mode-hook 'turn-on-pandoc)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
