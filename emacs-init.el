@@ -29,23 +29,24 @@
 (setenv "EDITOR" "emacsclient")
 
 ;;; PATH setup - some for Mac OS X - emulating PATH in Terminal app
-(defvar my-path-directories
-  `("~/bin" "/Developer/usr/bin" "/usr/local/git/bin" "/usr/local/bin"))
-
-(setenv "PATH"
-        (mapconcat
-         'identity
-         (delete-dups
-          (append
-           (mapcar (lambda (path)
-                     (if (string-match "^~" path)
-                         (replace-match (getenv "HOME") nil nil path)
-                         path))
-                   my-path-directories)
-           (split-string (getenv "PATH") ":")))
-         ":"))
-
-(mapc (lambda (path) (push path exec-path)) my-path-directories)
+;;; Emacs 24 sets PATH from environment, so this is not needed
+(when (< emacs-major-version 24)
+  (let ((my-path-directories
+         `("~/bin" "/Developer/usr/bin" "/usr/local/git/bin" "/usr/local/bin")))
+    (setenv "PATH"
+            (mapconcat
+             'identity
+             (delete-dups
+              (append
+               (mapcar (lambda (path)
+                         (if (string-match "^~" path)
+                             (replace-match (getenv "HOME") nil nil path)
+                           path))
+                       my-path-directories)
+               (split-string (getenv "PATH") ":")))
+             ":"))
+    (mapc (lambda (path) (push path exec-path))
+          my-path-directories)))
 
 ;;;; 2) Editing basics: enable commands and bind keys
 
