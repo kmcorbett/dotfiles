@@ -30,23 +30,22 @@
 
 ;;; PATH setup - some for Mac OS X - emulating PATH in Terminal app
 ;;; Emacs 24 sets PATH from environment, so this is not needed
-(when (< emacs-major-version 24)
-  (let ((my-path-directories
-         `("~/bin" "/Developer/usr/bin" "/usr/local/git/bin" "/usr/local/bin")))
-    (setenv "PATH"
-            (mapconcat
-             'identity
-             (delete-dups
-              (append
-               (mapcar (lambda (path)
-                         (if (string-match "^~" path)
-                             (replace-match (getenv "HOME") nil nil path)
-                           path))
-                       my-path-directories)
-               (split-string (getenv "PATH") ":")))
-             ":"))
-    (mapc (lambda (path) (push path exec-path))
-          my-path-directories)))
+(let ((my-path-directories
+       `("~/bin" "/Developer/usr/bin" "/usr/local/git/bin" "/usr/local/bin")))
+  (setenv "PATH"
+          (mapconcat
+           'identity
+           (delete-dups
+            (append
+             (mapcar (lambda (path)
+                       (if (string-match "^~" path)
+                           (replace-match (getenv "HOME") nil nil path)
+                         path))
+                     my-path-directories)
+             (split-string (getenv "PATH") ":")))
+           ":"))
+  (mapc (lambda (path) (push path exec-path))
+        my-path-directories))
 
 ;;;; 2) Editing basics: enable commands and bind keys
 
@@ -81,17 +80,20 @@
 ;;; Packages I use
 
 (defvar my-packages-list 
-  '(color-theme auto-complete markdown-mode pandoc-mode
+  '(cl-lib
+    color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    slime paredit 
-    clojure-mode clojure-cheatsheet))
+    dash-at-point slime paredit clojure-mode))
 
-(defun install-my-packages (&optional refresh-p)
+;; Use Melpa package repo 
+(setq package-user-dir "~/.emacs.d/elpa/")
+(package-initialize)
+
+(defvar package-refresh-p t)
+
+(defun install-my-packages ()
   (interactive)
-  ;; Use Melpa package repo 
-  (setq package-user-dir "~/.emacs.d/elpa/")
-  (package-initialize)
-  (when refresh-p
+  (when package-refresh-p
     (package-refresh-contents))
   ;; Maybe install each package
   (mapc #'(lambda (name)
@@ -157,6 +159,12 @@
                              (auto-complete-mode 1))
                          ))
 (real-global-auto-complete-mode t)
+
+;;; Dash
+(autoload 'dash-at-point "dash-at-point"
+          "Search the word at point with Dash." t nil)
+(global-set-key "\C-cd" 'dash-at-point)
+(global-set-key "\C-ce" 'dash-at-point-with-docset)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modes and Hooks
