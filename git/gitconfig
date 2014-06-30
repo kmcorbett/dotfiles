@@ -7,3 +7,5 @@
 	default = tracking
 [github]
 	user = kmcorbett
+[core]
+	autocrlf = true
