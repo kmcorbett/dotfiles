@@ -33,6 +33,12 @@
 
 ## Fresh miscellany
 
+### Fresh Emacs
+
+My Emacs dotfiles expect to run in Emacs 24 or later. Follow
+instructions for updating Emacs here: 
+[https://launchpad.net/~cassou/+archive/emacs](https://launchpad.net/~cassou/+archive/emacs)
+
 ### Fresh Quicklisp
 
     $ cd
