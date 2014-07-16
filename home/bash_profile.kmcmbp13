@@ -8,3 +8,5 @@ export MEVECTORSREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine
 
 # Oracle
 export LD_LIBRARY_PATH=/opt/oracle/lib64:$LD_LIBRARY_PATH
+export PATH=/opt/oracle/bin:$PATH
+export DYLD_LIBRARY_PATH=/opt/oracle/lib64:$DYLD_LIBRARY_PATH

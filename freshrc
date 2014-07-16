@@ -35,6 +35,11 @@ fresh-options --file=~/.gitconfig
   fresh git/gitconfig.$(hostname -s) --ignore-missing
 fresh-options
 
+# Oracle
+fresh-options --file=~/.tnsnames/tnsnames.ora
+  fresh oracle/tnsnames.ora.$(hostname -s) --ignore-missing
+fresh-options
+
 # Verisk inits
 fresh measuresengine/dtinit --file=~/.dtinit
 fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
