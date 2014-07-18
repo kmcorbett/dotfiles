@@ -7,6 +7,10 @@ export MEREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine.git
 export MEVECTORSREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine-test-vectors.git
 
 # Oracle
-export LD_LIBRARY_PATH=/opt/oracle/lib64:$LD_LIBRARY_PATH
-export PATH=/opt/oracle/bin:$PATH
-export DYLD_LIBRARY_PATH=/opt/oracle/lib64:$DYLD_LIBRARY_PATH
+export ORACLE_HOME=/opt/oracle
+if [ -e "${ORACLE_HOME}" ]; then
+  export LD_LIBRARY_PATH="$ORACLE_HOME/lib64:$LD_LIBRARY_PATH"
+  export DYLD_LIBRARY_PATH="$ORACLE_HOME/lib64:$DYLD_LIBRARY_PATH"
+  export PATH="$ORACLE_HOME/bin:$PATH"
+  export TNS_ADMIN=~/.tnsnames 
+fi
