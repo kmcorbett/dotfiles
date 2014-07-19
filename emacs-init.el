@@ -28,6 +28,10 @@
 (setenv "GIT_PAGER" "cat")
 (setenv "EDITOR" "emacsclient")
 
+;;; Bash profile for shell-mode
+(when (file-exists-p "~/.bash_profile")
+  (setq explicit-bash-args '("--login" "--init-file" "~/.bash_profile" "-i")))
+
 ;;; PATH setup - some for Mac OS X - emulating PATH in Terminal app
 ;;; Emacs 24 sets PATH from environment, so this is not needed
 (let ((my-path-directories

@@ -22,6 +22,7 @@
 ## Misc env
 export PS1="\h:\W\n\u\$ "
 export EDITOR=emacs
+export ALTERNATE_EDITOR=
 export NAME="Keith M Corbett"
 
 ## Bash inits
