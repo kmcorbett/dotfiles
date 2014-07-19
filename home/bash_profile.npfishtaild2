@@ -1,0 +1,27 @@
+# .bash_profile.local
+
+# Verisk Health custom
+export EMAIL="kcorbett@veriskhealth.com"
+export REPO="https://isoscmsvnp1.iso.com/svn/veriskhealth/projects/UnifiedPlatform/RulesEngine/"
+export MEREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine.git
+export MEVECTORSREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine-test-vectors.git
+
+# Oracle
+export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+if [ -e "${ORACLE_HOME}" ]; then
+  export LD_LIBRARY_PATH="$ORACLE_HOME/lib:$LD_LIBRARY_PATH"
+  export DYLD_LIBRARY_PATH="$ORACLE_HOME/lib:$DYLD_LIBRARY_PATH"
+  export PATH="$ORACLE_HOME/bin:$PATH"
+  export TNS_ADMIN=~/.tnsnames 
+fi
+
+export SSH_ASKPASS=
+
+# Measures Engine
+export REPO="https://isoscmsvnp1.iso.com/svn/veriskhealth/projects/UnifiedPlatform/RulesEngine/"
+export MEREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine.git"
+export MEVECTORSREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine-test-vectors.git"
+
+export DT_LISP="~/bin/lisp"
+export LD_LIBRARY_PATH_DEFAULT="/usr/local/BerkeleyDB.5.3/lib/:/usr/lib/oracle/11.2/client64/lib/"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_DEFAULT"
