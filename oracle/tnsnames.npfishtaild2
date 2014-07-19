@@ -1,0 +1,8 @@
+d2he =
+(DESCRIPTION =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = 10.48.20.14 )(PORT = 1521))
+  (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = d2he)
+  )
+)
