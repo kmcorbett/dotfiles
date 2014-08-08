@@ -87,7 +87,7 @@
   '(cl-lib
     color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    dash-at-point slime paredit clojure-mode))
+    dash-at-point slime paredit clojure-mode haskell-mode))
 
 ;; Use Melpa package repo 
 (setq package-user-dir "~/.emacs.d/elpa/")
@@ -184,6 +184,11 @@
 (require 'clojure-mode)
 (add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
 (add-hook 'clojure-mode-hook 'paredit-mode)
+
+;;; Haskell
+(require 'haskell-mode)
+(add-to-list 'magic-mode-alist '("\\.hs" . haskell-mode))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;;; Verisk CIF files
 (add-to-list 'magic-mode-alist '(".*:properties.*:cif-version" . text-mode))
