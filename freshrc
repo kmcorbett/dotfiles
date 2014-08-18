@@ -47,6 +47,5 @@ fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
 fresh_after_build() {
     chmod +x ~/bin/tunnel2code.sh
     echo "++ Git config global user:"
-    git config --global --get user.name
-    git config --global --get user.email
+    git config --global --get-regexp '^user.*'
 }

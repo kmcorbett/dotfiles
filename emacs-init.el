@@ -87,7 +87,7 @@
   '(cl-lib
     color-theme auto-complete markdown-mode pandoc-mode
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    dash-at-point slime paredit clojure-mode))
+    dash-at-point slime paredit clojure-mode haskell-mode))
 
 ;; Use Melpa package repo 
 (setq package-user-dir "~/.emacs.d/elpa/")
@@ -176,14 +176,16 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;;; Lisp
-(require 'lisp-mode)
-(add-hook 'lisp-mode-hook 'paredit-mode)
-
 ;;; Clojure
+;;; TODO: load cider
 (require 'clojure-mode)
 (add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
 (add-hook 'clojure-mode-hook 'paredit-mode)
+
+;;; Haskell - for great good
+(require 'haskell-mode)
+(add-to-list 'magic-mode-alist '("\\.hs" . haskell-mode))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;;; Java
 (require 'java-mode)
@@ -193,6 +195,10 @@
             (setq c-basic-offset 4 tab-width 4 indent-tabs-mode nil)
             (setq c-comment-start-regexp "(@|/(/|[*][*]?))")
             (modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
+
+;;; Lisp
+(require 'lisp-mode)
+(add-hook 'lisp-mode-hook 'paredit-mode)
 
 ;;; Verisk CIF files
 (add-to-list 'magic-mode-alist '(".*:properties.*:cif-version" . text-mode))
