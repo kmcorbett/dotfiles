@@ -8,7 +8,9 @@
 [github]
 	user = kmcorbett
 [alias]
-  st = status
-  co = checkout
+  a  = add
+  br = branch
   ci = commit
+  co = checkout
+  st = status
 
