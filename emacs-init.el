@@ -185,6 +185,15 @@
 (add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
+;;; Java
+(require 'java-mode)
+(add-hook 'java-mode
+          (lambda ()
+            "Fix java mode tabs"
+            (setq c-basic-offset 4 tab-width 4 indent-tabs-mode nil)
+            (setq c-comment-start-regexp "(@|/(/|[*][*]?))")
+            (modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
+
 ;;; Verisk CIF files
 (add-to-list 'magic-mode-alist '(".*:properties.*:cif-version" . text-mode))
 
