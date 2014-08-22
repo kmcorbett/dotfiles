@@ -2,6 +2,10 @@
 
 ## Fresh dotfiles installation
 
+### Environment
+
+    $ export TMPDIR="~/tmp"
+
 ### Archive before Fresh
 
     $ cd
