@@ -188,7 +188,6 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;;; Java
-(require 'java-mode)
 (add-hook 'java-mode
           (lambda ()
             "Fix java mode tabs"
