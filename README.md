@@ -2,21 +2,27 @@
 
 ## Fresh dotfiles installation
 
+Note: All shell commands are prefaced with the prompt "$". All the
+commands shown here must be run in the user's home directory. In other
+words, we assume here that the user has used "cd" to set their working
+directory to the default (per-user) home directory path.
+
+### Environment
+
+    $ export TMPDIR="~/tmp"
+
 ### Archive before Fresh
 
-    $ cd
     $ files=".signature .bash_profile .bashrc .emacs.d/init.el .tmux.conf .ccl-init.lisp"
     $ tar cvf dotfiles-archive.tar $files
     $ rm $files
 
 ### Fresh from Github
 
-    $ cd
     $ git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
 
 ### Fresh for the first time
 
-    $ cd
     $ bash -c "`curl -sL --insecure get.freshshell.com`"
     $ ln -s ~/.dotfiles/freshrc ~/.freshrc
     $ fresh
@@ -41,7 +47,6 @@ instructions for updating Emacs here:
 
 ### Fresh Quicklisp
 
-    $ cd
     $ curl -O http://beta.quicklisp.org/quicklisp.lisp
     $ ccl
     ? (load "~/quicklisp.lisp")

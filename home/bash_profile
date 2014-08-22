@@ -20,10 +20,16 @@
 [ -r $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 ## Misc env
+
+# Shell
 export PS1="\h:\W\n\u\$ "
 export EDITOR=emacs
 export ALTERNATE_EDITOR=
 export NAME="Keith M Corbett"
+
+# Temp files
+mkdir -p ~/tmp
+export TMPDIR=~/tmp
 
 ## Bash inits
 [ -r $HOME/.bash_profile.local ] && source $HOME/.bash_profile.local
