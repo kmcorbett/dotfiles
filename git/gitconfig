@@ -13,4 +13,5 @@
   ci = commit
   co = checkout
   st = status
-
+[core]
+	autocrlf = input
