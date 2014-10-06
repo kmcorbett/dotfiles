@@ -2,4 +2,4 @@
 	name = Keith M Corbett (i91524)
 	email = kcorbett@veriskhealth.com
 [http]
-  #sslCAInf o= /home/kmcorbett/Dropbox/Clients/Verisk/code.verisk.com.pem
+  #sslCAInfo = /home/kmcorbett/Dropbox/Clients/Verisk/code.verisk.com.pem
