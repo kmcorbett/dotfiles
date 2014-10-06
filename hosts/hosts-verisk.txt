@@ -3,9 +3,9 @@
 10.48.20.12 npfishtaild2
 10.48.20.14 npfishtaild4
 
+# UP Dev 
+10.0.19.235 updevsh-shell01 updevsh-shell01.up.rdudc01.veriskhealth.net
+
 # Raleigh JIRA and Confluence
 10.1.0.158 jira.bhusa.bhsoftware.com
 10.1.0.159 confluence.bhusa.bhsoftware.com
-
-# UP Dev - hostnames are ??
-10.0.19.235 updev01.verisk.com 
