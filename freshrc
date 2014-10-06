@@ -33,6 +33,8 @@ fresh bin/Markdown.pl --file=~/bin/Markdown.pl
 fresh-options --file=~/.gitconfig
   fresh git/gitconfig
   fresh git/gitconfig.$(hostname -s) --ignore-missing
+  # Tweak this!
+  fresh git/gitconfig.nevo --ignore-missing
 fresh-options
 
 # Oracle
