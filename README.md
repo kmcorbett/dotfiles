@@ -11,23 +11,27 @@ directory to the default (per-user) home directory path.
 
     $ export TMPDIR="~/tmp"
 
-### Archive before Fresh
+### Archive un-fresh files
 
-    $ files=".signature .bash_profile .bashrc .emacs.d/init.el .tmux.conf .ccl-init.lisp"
-    $ tar cvf dotfiles-archive.tar $files
+The "fresh" command may file if you attempt to freshen a file that
+already exists and is not a link to the fresh source file.
+
+    $ files1=".signature .bash_profile .bash_profile.local .bashrc .tmux.conf"
+    $ files2=".gitconfig .emacs.d/init.el .ccl-init.lisp"
+    $ tar cvf dotfiles-archive.tar $files1 $files2
     $ rm $files
 
-### Fresh from Github
+### Fresh sources from Github
 
     $ git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
 
-### Fresh for the first time
+### Freshen for the first time
 
     $ bash -c "`curl -sL --insecure get.freshshell.com`"
     $ ln -s ~/.dotfiles/freshrc ~/.freshrc
     $ fresh
 
-## Freshen dotfiles 2nd and more times
+## Freshen dotfiles 2nd and future times
 
 ### Fresh every time
 
@@ -39,13 +43,30 @@ directory to the default (per-user) home directory path.
 
 ## Fresh miscellany
 
+#### Install dependencies
+
 ### Fresh Emacs
 
 My Emacs dotfiles expect to run in Emacs 24 or later. Follow
 instructions for updating Emacs here: 
 [https://launchpad.net/~cassou/+archive/emacs](https://launchpad.net/~cassou/+archive/emacs)
 
-### Fresh Quicklisp
+To install various dependencies (used by emacs-init.el)
+
+    $ brew upgrade && brew install gs w3m
+
+#### Install mew email reader
+
+Install mew from sources: download, unzip, and build
+
+    $ mewfiles=<location>
+    $ cd <root of sources>
+
+(This is from memory and probably does not work - TBD)
+
+    $ make configure && make install
+
+### Fresh Common Lisp using QuickLisp
 
     $ curl -O http://beta.quicklisp.org/quicklisp.lisp
     $ ccl
