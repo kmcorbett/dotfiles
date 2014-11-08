@@ -85,7 +85,9 @@
 
 (defvar my-packages-list 
   '(cl-lib
-    color-theme auto-complete markdown-mode pandoc-mode
+    auto-complete
+    color-theme
+    markdown-mode pandoc-mode doc-view w3m
     git-commit-mode git-rebase-mode gitconfig-mode magit
     dash-at-point slime paredit clojure-mode haskell-mode))
 
@@ -216,6 +218,75 @@
 (require 'git-commit-mode)
 (require 'git-rebase-mode)
 (require 'magit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; mew -- mail
+;; Dependencies:
+;;  brew upgrade; brew install gs w3m mew
+
+(autoload 'mew "mew" nil t)
+(autoload 'mew-send "mew" nil t)
+;; Optional setup (Read Mail menu for Emacs 21):
+(if (boundp 'read-mail-command)
+    (setq read-mail-command 'mew))
+;; Optional setup (e.g. C-xm for sending a message):
+(autoload 'mew-user-agent-compose "mew" nil t)
+(if (boundp 'mail-user-agent)
+    (setq mail-user-agent 'mew-user-agent))
+(if (fboundp 'define-mail-user-agent)
+    (define-mail-user-agent
+      'mew-user-agent
+      'mew-user-agent-compose
+      'mew-draft-send-message
+      'mew-draft-kill
+      'mew-send-hook))
+
+;;; w3m Web browser
+
+;;change default browser for 'browse-url'  to w3m
+(setq browse-url-browser-function 'w3m-goto-url-new-session)
+ 
+;;change w3m user-agent to android
+(setq w3m-user-agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.")
+ 
+;;quick access hacker news
+;; (defun hn ()
+;;   (interactive)
+;;   (browse-url "http://news.ycombinator.com"))
+ 
+;; ;;quick access reddit
+;; (defun reddit (reddit)
+;;   "Opens the REDDIT in w3m-new-session"
+;;   (interactive (list
+;;                 (read-string "Enter the reddit (default: psycology): " nil nil "psychology" nil)))
+;;   (browse-url (format "http://m.reddit.com/r/%s" reddit))
+;;   )
+ 
+;;i need this often
+(defun wikipedia-search (search-term)
+  "Search for SEARCH-TERM on wikipedia"
+  (interactive
+   (let ((term (if mark-active
+                   (buffer-substring (region-beginning) (region-end))
+                 (word-at-point))))
+     (list
+      (read-string
+       (format "Wikipedia (%s):" term) nil nil term)))
+   )
+  (browse-url
+   (concat
+    "http://en.m.wikipedia.org/w/index.php?search="
+    search-term
+    ))
+  )
+ 
+;;when I want to enter the web address all by hand
+(defun w3m-open-site (site)
+  "Opens site in new w3m session with 'http://' appended"
+  (interactive
+   (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page nil )))
+  (w3m-goto-url-new-session
+   (concat "http://" site)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 5) startup and global flags

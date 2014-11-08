@@ -15,3 +15,5 @@
   st = status
 [core]
 	autocrlf = input
+[http]
+	postBuffer = 524288000
