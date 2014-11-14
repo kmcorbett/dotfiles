@@ -14,7 +14,8 @@
 [ -r /usr/local/mysql/bin ] && export PATH=/usr/local/mysql/bin:$PATH
 
 # Antlr4
-[ -r /usr/local/lib/antlr-4-4-complete.jar ] && export CLASSPATH=".:/usr/local/lib/antlr-4.4-complete.jar:$CLASSPATH"
+ANTLRJAR=/usr/local/lib/antlr-4.4-complete.jar
+[ -r $ANTLRJAR ] && export CLASSPATH=".:$ANTLRJAR:$CLASSPATH"
 
 # Boxen setup (including Homebrew) should override other dev tools
 [ -r /opt/boxen/env.sh ] && source /opt/boxen/env.sh
