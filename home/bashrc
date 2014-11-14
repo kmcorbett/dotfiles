@@ -6,10 +6,12 @@ umask 002
 
 [ -r $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
+#
 # User specific aliases and functions
+#
 
 alias l="ls -lFh"
 
-# Antlr
+# Antlr4
 alias antlr4='java -jar /usr/local/lib/antlr-4.4-complete.jar'
 alias grun='java org.antlr.v4.runtime.misc.TestRig'
