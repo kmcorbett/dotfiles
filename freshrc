@@ -43,11 +43,11 @@ fresh-options --file=~/.tnsnames/tnsnames.ora
 fresh-options
 
 # Verisk inits
-fresh measuresengine/dtinit --file=~/.dtinit
-fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
+#fresh measuresengine/dtinit --file=~/.dtinit
+#fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
 
 fresh_after_build() {
-    chmod +x ~/bin/tunnel2code.sh
+    #chmod +x ~/bin/tunnel2code.sh
     echo "++ Git config global user:"
     git config --global --get-regexp '^user.*'
 }

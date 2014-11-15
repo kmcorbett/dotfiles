@@ -1,16 +1,2 @@
-# .bash_profile.local
+# .bash_profile.local for kmcmbp13 Mac OS X
 
-# Verisk Health custom
-export EMAIL="kcorbett@veriskhealth.com"
-export REPO="https://isoscmsvnp1.iso.com/svn/veriskhealth/projects/UnifiedPlatform/RulesEngine/"
-export MEREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine.git
-export MEVECTORSREPO="ssh://git@code.verisk.com:7999/vhpea/vhpea-measures-engine-test-vectors.git
-
-# Oracle
-export ORACLE_HOME=/opt/oracle
-if [ -e "${ORACLE_HOME}" ]; then
-  export LD_LIBRARY_PATH="$ORACLE_HOME/lib64:$LD_LIBRARY_PATH"
-  export DYLD_LIBRARY_PATH="$ORACLE_HOME/lib64:$DYLD_LIBRARY_PATH"
-  export PATH="$ORACLE_HOME/bin:$PATH"
-  export TNS_ADMIN=~/.tnsnames 
-fi
