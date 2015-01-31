@@ -89,7 +89,8 @@
     color-theme
     markdown-mode pandoc-mode doc-view w3m
     git-commit-mode git-rebase-mode gitconfig-mode magit
-    dash-at-point slime paredit clojure-mode haskell-mode))
+    dash-at-point slime paredit
+    clojure-mode haskell-mode scala-mode go-mode))
 
 ;; Use Melpa package repo 
 (setq package-user-dir "~/.emacs.d/elpa/")
@@ -151,6 +152,14 @@
 ;; Use UTF-8 character encoding
 (set-language-environment "utf-8")
 (setq slime-net-coding-system 'utf-8-unix)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; GO setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'go-mode-autoloads)
+(add-to-list 'magic-mode-alist '("\\.go" .go-mode))
+;;(add-hook 'go-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-Complete

@@ -1,2 +1,10 @@
 # .bash_profile.local for kmcmbp13 Mac OS X
 
+export SCALA_HOME=~/Tools/scala-2.11.5
+export PATH=${PATH}:${SCALA_HOME}/bin
+
+export GO_HOME=/usr/local/go
+export PATH=${PATH}:${GO_HOME}/bin
+
+export GOPATH=~/Projects/gotestarama
+export PATH=${PATH}:${GOPATH}/bin
