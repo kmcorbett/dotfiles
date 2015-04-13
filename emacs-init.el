@@ -290,10 +290,15 @@
   )
  
 ;;when I want to enter the web address all by hand
+(defvar my-w3m-last-site "google.com")
 (defun w3m-open-site (site)
   "Opens site in new w3m session with 'http://' appended"
   (interactive
-   (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page nil )))
+   (list
+    (setq my-w3m-last-site
+          (read-string
+           (format "Enter website address(default: %s):" my-w3m-last-site)
+           nil nil my-w3m-last-site nil ))))
   (w3m-goto-url-new-session
    (concat "http://" site)))
 
