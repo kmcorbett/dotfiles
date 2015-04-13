@@ -8,3 +8,8 @@ export PATH=${PATH}:${GO_HOME}/bin
 
 export GOPATH=~/Projects/gotestarama
 export PATH=${PATH}:${GOPATH}/bin
+
+# project Renegade
+export ARCHIVA_USERNAME=deploy
+export ARCHIVA_PASSWORD=WogdBjTAap5i
+
