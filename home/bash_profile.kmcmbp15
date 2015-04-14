@@ -1,4 +1,7 @@
-# .bash_profile.local for kmcmbp13 Mac OS X
+# .bash_profile.local for kmcmbp15 Mac OS X
+
+# Identity
+export EMAIL="keith.corbett@mphasis.com"
 
 export SCALA_HOME=~/Tools/scala-2.11.5
 export PATH=${PATH}:${SCALA_HOME}/bin
