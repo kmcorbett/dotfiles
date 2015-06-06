@@ -34,7 +34,8 @@ fresh bin/Markdown.pl --file=~/bin/Markdown.pl
 fresh-options --file=~/.gitconfig
   fresh git/gitconfig
   fresh git/gitconfig.$(hostname -s) --ignore-missing
-  # Why did I want this for Nevo??
+  # Uncomment this for Nevo
+  # TODO: local scripts for per-site settings
   # fresh git/gitconfig.nevo --ignore-missing
 fresh-options
 
