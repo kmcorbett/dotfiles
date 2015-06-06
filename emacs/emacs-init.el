@@ -73,6 +73,7 @@
 
 ;;; Local scripts
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/")
 
 ;;; Package manager
 (require 'package)
@@ -90,7 +91,8 @@
     markdown-mode pandoc-mode doc-view w3m
     git-commit-mode git-rebase-mode gitconfig-mode magit
     dash-at-point slime paredit
-    clojure-mode haskell-mode scala-mode go-mode))
+    clojure-mode cider
+    haskell-mode scala-mode go-mode))
 
 ;; Use Melpa package repo 
 (setq package-user-dir "~/.emacs.d/elpa/")
@@ -188,8 +190,8 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;;; Clojure
-;;; TODO: load cider
 (require 'clojure-mode)
+(require 'cider)
 (add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
@@ -226,7 +228,9 @@
 ;;; Git
 (require 'git-commit-mode)
 (require 'git-rebase-mode)
+
 (require 'magit)
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;;; w3m Web browser
 
@@ -279,6 +283,17 @@
            nil nil my-w3m-last-site nil ))))
   (w3m-goto-url-new-session
    (concat "http://" site)))
+
+(defun w3m-browse-current-buffer ()
+  (interactive)
+  (let ((filename (concat (make-temp-file "w3m-") ".html")))
+    (unwind-protect
+         (progn
+           (write-region (point-min) (point-max) filename)
+           (w3m-find-file filename))
+      (delete-file filename))))
+
+(load "eval-in-repl-init")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 5) startup and global flags
