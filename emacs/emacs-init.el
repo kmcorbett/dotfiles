@@ -1,28 +1,22 @@
 ;;;; -*- Mode: Emacs-Lisp; tab-width: 2; indent-tabs-mode: nil -*-
 
-;;; My all-purpose, singing and dancing Emacs init file! [kmcorbett@gmail.com]
-;;; 1) Environment variables for shells
-;;; 2) Editing basics: enable commands and bind keys
-;;; 3) Load paths and optional modules
-;;; 4) Modules for programming, writing, editing:
-;;;    Common Lisp (editing)
-;;;    Slime
-;;;    ECB 
-;;;    Auto-Complete
-;;;    VC for Subversion, darcs, etc
-;;;    Markdown mode
-;;; 5) Startup and global flags
-;;; 6) Customization forms
+;; My all-purpose, singing and dancing Emacs init file! [kmcorbett@gmail.com]
+;; 1) Shell environment
+;; 2) Editing basics: enable commands and bind keys
+;; 3) Load paths and optional packages
+;; 4) Programming: Common Lisp, Clojure, Git, etc
+;; 5) Startup and global flags
+;; 6) Customization forms
 
-(eval-when-compile 
-  (require 'cl))
+(eval-when-compile (require 'cl))
 
 (let ((path "/Applications/Emacs.app"))
   (when (and (file-exists-p path)
              (zerop (or (string-match-p (concat "^" path) invocation-directory) -1)))
     (cd (getenv "HOME"))))
 
-;;;; 1) Environment variables for shells
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; 1) Shell environment
 
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" "cat")
@@ -51,6 +45,7 @@
   (mapc (lambda (path) (push path exec-path))
         my-path-directories))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 2) Editing basics: enable commands and bind keys
 
 ;;; Enable commands
@@ -69,6 +64,7 @@
 (define-key global-map "\M-(" 'insert-parentheses)
 (define-key global-map "\M-+" 'tags-loop-continue)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 3) Load paths and optional packages
 
 ;;; Local scripts
@@ -120,12 +116,14 @@
     ;;(color-theme-hober)
     ))
 
-;;; 4) Modules for programming:
-;;;    Slime
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 4) Programming:
 ;;;    Auto-Complete
-;;;    ECB 
-;;;    VC for Subversion, darcs, etc
-;;;    Modes for PHP, ...
+;;;    VC for Git, Subversion, darcs, etc
+;;;    Dash
+;;;    Java
+;;;    Common Lisp / Slime, Clojure / Cider
+;;;    Markdown mode
 
 (setq lisp-indent-function 'common-lisp-indent-function)
 
@@ -157,7 +155,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; GO setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'go-mode-autoloads)
 (add-to-list 'magic-mode-alist '("\\.go" .go-mode))
@@ -185,7 +182,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modes and Hooks
-;;;
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
@@ -253,7 +249,7 @@
 ;;   (browse-url (format "http://m.reddit.com/r/%s" reddit))
 ;;   )
  
-;;i need this often
+;; TODO: Do I need this?
 (defun wikipedia-search (search-term)
   "Search for SEARCH-TERM on wikipedia"
   (interactive
@@ -341,6 +337,8 @@
  '(slime-repl-prompt-face ((t (:inherit font-lock-keyword-face :foreground "#0022AA"))))
  '(slime-repl-result-face ((t (:foreground "darkgreen")))))
 
+;; Override custom settings found in local.el
+;; TODO: Test this idea as it may not work as intended
 (when (file-exists-p "~/.emacs.d/local.el")
   (load-file "~/.emacs.d/local.el"))
 
