@@ -289,7 +289,7 @@
            (w3m-find-file filename))
       (delete-file filename))))
 
-(load "eval-in-repl-init")
+(load "eval-in-repl-init.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 5) startup and global flags

@@ -24,7 +24,7 @@ fresh quicklisp-init.lisp --file=~/.ccl-init/quicklisp-init.lisp
 
 # Emacs
 fresh emacs/emacs-init.el --file=~/.emacs.d/init.el
-fresh emacs/eval-in-repl-init.el --file=~/.emacs.d/eval-in-repl.el
+fresh emacs/eval-in-repl-init.el --file=~/.emacs.d/eval-in-repl-init.el
 
 # Markdown
 fresh bin/Markdown.pl --file=~/bin/Markdown.pl
