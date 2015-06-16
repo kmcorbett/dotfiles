@@ -13,12 +13,10 @@ directory to the default (per-user) home directory path.
 
 ### Archive un-fresh files
 
-The "fresh" command may file if you attempt to freshen a file that
+The "fresh" command may complain if you attempt to freshen a file that
 already exists and is not a link to the fresh source file.
 
-    $ files1=".signature .bash_profile .bash_profile.local .bashrc .tmux.conf"
-    $ files2=".gitconfig .emacs.d/init.el .ccl-init.lisp"
-    $ tar cvf dotfiles-archive.tar $files1 $files2
+    $ tar cvf dotfiles-archive.tar [file...]
     $ rm $files
 
 ### Fresh sources from Github
@@ -40,45 +38,3 @@ already exists and is not a link to the fresh source file.
 ### (Re)Fresh from Github
 
     $ fresh update
-
-## Fresh miscellany
-
-#### Install dependencies
-
-### Fresh Emacs
-
-My Emacs dotfiles expect to run in Emacs 24 or later. Follow
-instructions for updating Emacs here: 
-[https://launchpad.net/~cassou/+archive/emacs](https://launchpad.net/~cassou/+archive/emacs)
-
-To install various dependencies (used by emacs-init.el)
-
-    $ brew upgrade && brew install gs w3m
-
-#### Install mew email reader
-
-Install mew from sources: download, unzip, and build
-
-    $ mewfiles=<location>
-    $ cd <root of sources>
-
-(This is from memory and probably does not work - TBD)
-
-    $ make configure && make install
-
-### Fresh Common Lisp using QuickLisp
-
-    $ curl -O http://beta.quicklisp.org/quicklisp.lisp
-    $ ccl
-    ? (load "~/quicklisp.lisp")
-    ? (quicklisp-quickstart:install)
-    ? (ql:quickload "quicklisp-slime-helper")
-
-Next time:
-
-    $ ccl
-    ? (load "~/quicklisp/setup.lisp")
-    
-### Freshen file modes
-
-    $ chmod +x ~/bin/tunnel2code.sh
