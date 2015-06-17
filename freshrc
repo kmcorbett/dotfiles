@@ -40,16 +40,13 @@ fresh-options --file=~/.gitconfig
 fresh-options
 
 # Oracle
-fresh-options --file=~/.tnsnames/tnsnames.ora
-  fresh oracle/tnsnames.ora.$(hostname -s) --ignore-missing
-fresh-options
-
-# Verisk inits
-#fresh measuresengine/dtinit --file=~/.dtinit
-#fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
+# Uncomment this as needed
+# fresh-options --file=~/.tnsnames/tnsnames.ora
+#   fresh oracle/tnsnames.ora.$(hostname -s) --ignore-missing
+# fresh-options
 
 fresh_after_build() {
-    #chmod +x ~/bin/tunnel2code.sh
+    chmod +x ~/bin/Markdown.pl
     echo "++ Git config global user:"
     git config --global --get-regexp '^user.*'
 }

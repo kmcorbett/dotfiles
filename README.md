@@ -13,12 +13,10 @@ directory to the default (per-user) home directory path.
 
 ### Archive un-fresh files
 
-The "fresh" command may file if you attempt to freshen a file that
+The "fresh" command may complain if you attempt to freshen a file that
 already exists and is not a link to the fresh source file.
 
-    $ files1=".signature .bash_profile .bash_profile.local .bashrc .tmux.conf"
-    $ files2=".gitconfig .emacs.d/init.el .ccl-init.lisp"
-    $ tar cvf dotfiles-archive.tar $files1 $files2
+    $ tar cvf dotfiles-archive.tar [file...]
     $ rm $files
 
 ### Fresh sources from Github
@@ -79,6 +77,6 @@ Next time:
     $ ccl
     ? (load "~/quicklisp/setup.lisp")
     
-### Freshen file modes
+### Post-freshen fix file modes
 
-    $ chmod +x ~/bin/tunnel2code.sh
+$ chmod +x ~/bin/Markdown.pl
