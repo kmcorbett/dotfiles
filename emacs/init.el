@@ -1,7 +1,7 @@
 ;;;; -*- Mode: Emacs-Lisp; tab-width: 2; indent-tabs-mode: nil -*-
 
 ;; My all-purpose, singing and dancing Emacs init file! [kmcorbett@gmail.com]
-;; 1) Shell environment
+;; 1) General environment
 ;; 2) Editing basics: enable commands and bind keys
 ;; 3) Load paths and optional packages
 ;; 4) Programming: Common Lisp, Clojure, Git, etc
@@ -16,7 +16,7 @@
     (cd (getenv "HOME"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; 1) Shell environment
+;;;; 1) General environment
 
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" "cat")
@@ -45,6 +45,12 @@
   (mapc (lambda (path) (push path exec-path))
         my-path-directories))
 
+;; Always ALWAYS use UTF-8
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(load-library "iso-transl")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 2) Editing basics: enable commands and bind keys
 
@@ -69,7 +75,6 @@
 
 ;;; Local scripts
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/")
 
 ;;; Package manager
 (require 'package)
@@ -190,6 +195,8 @@
 (require 'cider)
 (add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
 (add-hook 'clojure-mode-hook 'paredit-mode)
+(setq cider-repl-wrap-history t)
+(setq cider-repl-history-file "~/.emacs.d/nrepl-history")
 
 ;;; Haskell - for great good
 (require 'haskell-mode)
@@ -303,6 +310,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 6) Customization
 
+;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -314,6 +324,7 @@
  '(gud-gdb-command-name "gdb --annotate=1")
  '(indent-tabs-mode nil)
  '(large-file-warning-threshold nil)
+ '(gc-cons-threshold 500000000)
  '(mode-require-final-newline (quote ask))
  '(require-final-newline (quote ask))
  '(safe-local-variable-values (quote ((indent-tabs) (Package . YB) (Package . GUI) (indent-tabs-mode) (Package . utils) (Package . HUNCHENTOOT) (Syntax . COMMON-LISP) (Package . CL-USER) (Package . CCL) (Syntax . ANSI-Common-Lisp) (Base . 10))))

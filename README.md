@@ -38,6 +38,7 @@ already exists and is not a link to the fresh source file.
 ### (Re)Fresh from Github
 
     $ fresh update
+<<<<<<< HEAD
 
 ## Fresh miscellany
 
@@ -77,6 +78,6 @@ Next time:
     $ ccl
     ? (load "~/quicklisp/setup.lisp")
     
-### Post-freshen fix file modes
+### Post-freshen fix file modes (if needed)
 
-$ chmod +x ~/bin/Markdown.pl
+    $ chmod +x ~/bin/Markdown.pl
