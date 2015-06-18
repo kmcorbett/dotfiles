@@ -9,40 +9,39 @@ directory to the default (per-user) home directory path.
 
 ### Environment
 
-    $ export TMPDIR="~/tmp"
+    export TMPDIR="~/tmp"
 
 ### Archive un-fresh files
 
 The "fresh" command may complain if you attempt to freshen a file that
 already exists and is not a link to the fresh source file.
 
-    $ tar cvf dotfiles-archive.tar [file...]
-    $ rm $files
+    tar cvf dotfiles-archive.tar [file...]
+    rm $files
 
 ### Fresh sources from Github
 
-    $ git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
+    git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
 
 ### Freshen for the first time
 
-    $ bash -c "`curl -sL --insecure get.freshshell.com`"
-    $ ln -s ~/.dotfiles/freshrc ~/.freshrc
-    $ fresh
+    bash -c "`curl -sL --insecure get.freshshell.com`"
+    ln -s ~/.dotfiles/freshrc ~/.freshrc
+    fresh
 
 ## Freshen dotfiles 2nd and future times
 
 ### Fresh every time
 
-    $ fresh
+    fresh
 
 ### (Re)Fresh from Github
 
-    $ fresh update
-<<<<<<< HEAD
+    fresh update
 
-## Fresh miscellany
+## Miscellaneous apps and tools
 
-#### Install dependencies
+### Install dependencies
 
 ### Fresh Emacs
 
@@ -52,32 +51,31 @@ instructions for updating Emacs here:
 
 To install various dependencies (used by emacs-init.el)
 
-    $ brew upgrade && brew install gs w3m
+    brew upgrade && brew install gs w3m
 
-#### Install mew email reader
+### Clozure Common Lisp (ccl)
 
-Install mew from sources: download, unzip, and build
+Configure ccl initialization in home/bash_profile.<hostname>
 
-    $ mewfiles=<location>
-    $ cd <root of sources>
-
-(This is from memory and probably does not work - TBD)
-
-    $ make configure && make install
+    cd ~/Tools
+    svn co http://svn.clozure.com/publicsvn/openmcl/release/1.10/darwinx86/ccl
+    cd ccl
+    ./scripts/ccl -n
+    ? (ccl:rebuild-full :full t)    
 
 ### Fresh Common Lisp using QuickLisp
 
-    $ curl -O http://beta.quicklisp.org/quicklisp.lisp
-    $ ccl
+    curl -O http://beta.quicklisp.org/quicklisp.lisp
+    ccl -n
     ? (load "~/quicklisp.lisp")
     ? (quicklisp-quickstart:install)
     ? (ql:quickload "quicklisp-slime-helper")
 
 Next time:
 
-    $ ccl
+    ccl
     ? (load "~/quicklisp/setup.lisp")
     
 ### Post-freshen fix file modes (if needed)
 
-    $ chmod +x ~/bin/Markdown.pl
+    chmod +x ~/bin/Markdown.pl

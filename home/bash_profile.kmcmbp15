@@ -17,3 +17,7 @@ export ARCHIVA_USERNAME=deploy
 export ARCHIVA_PASSWORD=WogdBjTAap5i
 
 [ -r $HOME/Tools/gitflow ] && export PATH=$HOME/Tools/gitflow:$PATH
+
+# CCL
+export CCL_DEFAULT_DIRECTORY=$HOME/Tools/ccl
+export PATH=${PATH}:${CCL_DEFAULT_DIRECTORY}/scripts
