@@ -2,10 +2,10 @@
 
 ## Fresh dotfiles installation
 
-Note: All shell commands are prefaced with the prompt "$". All the
-commands shown here must be run in the user's home directory. In other
-words, we assume here that the user has used "cd" to set their working
-directory to the default (per-user) home directory path.
+All the commands shown here must be run in the user's home
+directory. In other words, we assume here that the user has used "cd"
+to set their working directory to the default (per-user) home
+directory path.
 
 ### Environment
 
@@ -37,7 +37,13 @@ already exists and is not a link to the fresh source file.
 
 ### (Re)Fresh from Github
 
+To freshen dotfiles with sources on Github:
+
     fresh update
+
+Note this only works if current branch master is up to date.
+In other words, this attempts to pull from remote origin/master iff
+there are no local uncommitted changes.
 
 ## Miscellaneous apps and tools
 

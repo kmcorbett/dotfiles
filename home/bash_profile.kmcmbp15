@@ -3,15 +3,6 @@
 # Identity
 export EMAIL="keith.corbett@mphasis.com"
 
-export SCALA_HOME=~/Tools/scala-2.11.5
-export PATH=${PATH}:${SCALA_HOME}/bin
-
-export GO_HOME=/usr/local/go
-export PATH=${PATH}:${GO_HOME}/bin
-
-export GOPATH=~/Projects/gotestarama
-export PATH=${PATH}:${GOPATH}/bin
-
 # project Renegade
 export ARCHIVA_USERNAME=deploy
 export ARCHIVA_PASSWORD=WogdBjTAap5i
