@@ -1,5 +1,7 @@
 # .bash_profile
 
+set filec
+
 ## Path inits
 
 # MacPorts
