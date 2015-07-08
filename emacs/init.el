@@ -51,6 +51,21 @@
 (prefer-coding-system 'utf-8)
 (load-library "iso-transl")
 
+;; Fonts
+(when (eq system-type 'darwin)
+  ;; default Latin font (e.g. Consolas)
+  (set-face-attribute 'default nil :family "Consolas")
+  ;; default font size (point * 10)
+  ;; WARNING!  Depending on the default font,
+  ;; if the size is not supported very well, the frame will be clipped
+  ;; so that the beginning of the buffer may not be visible correctly. 
+  (set-face-attribute 'default nil :height 165)
+  ;; if you want to use different font size for specific charset,
+  ;; add :size POINT-SIZE in the font-spec.
+  (set-fontset-font t 'ascii (font-spec :size 12 :name "Andale Mono"))
+  ;; you may want to add different for other charset in this way
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; 2) Editing basics: enable commands and bind keys
 
@@ -193,8 +208,11 @@
 ;;; Clojure
 (require 'clojure-mode)
 (require 'cider)
+
 (add-to-list 'magic-mode-alist '("\\.clj" . clojure-mode))
 (add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook 'auto-fill-mode)
+
 (setq cider-repl-wrap-history t)
 (setq cider-repl-history-file "~/.emacs.d/nrepl-history")
 
@@ -225,7 +243,7 @@
 
 ;;; Pandoc for translating Markdown to HTML etc
 (require 'pandoc-mode)
-(add-hook 'markdown-mode-hook 'turn-on-pandoc)
+(add-hook 'markdown-mode-hook 'pandoc-mode)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
 
 ;;; Git
