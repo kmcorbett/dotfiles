@@ -11,7 +11,9 @@ umask 002
 #
 
 alias l="ls -lFh"
-alias fnf="find . -name .git -prune -o -print"
+
+inclj() { find . -name '*.clj' -exec grep -nHr "$1" {} \; ; } 
+lsclj() { find . -name .git -prune -o -name '*.clj' -print ; }
 
 # Antlr4
 alias antlr4='java -jar /usr/local/lib/antlr-4.4-complete.jar'
