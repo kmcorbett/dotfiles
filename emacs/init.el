@@ -53,6 +53,11 @@
 
 ;; Fonts
 (when (eq system-type 'darwin)
+  ;; disable tool bar, menu bar, full screen
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (remove nil? '(1 3 5 nil nil nil))
+  (set-frame-parameter nil 'fullscreen 'fullboth)
   ;; default Latin font (e.g. Consolas)
   (set-face-attribute 'default nil :family "Consolas")
   ;; default font size (point * 10)
