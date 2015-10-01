@@ -23,8 +23,8 @@ fresh ccl-init.lisp --file
 fresh quicklisp-init.lisp --file=~/.ccl-init/quicklisp-init.lisp
 
 # Emacs
-fresh emacs/init.el --file=~/.emacs.d/init.el
-fresh emacs/eval-in-repl-init.el --file=~/.emacs.d/lisp/eval-in-repl-init.el
+;;fresh emacs/init.el --file=~/.emacs.d/init.el
+;;fresh emacs/eval-in-repl-init.el --file=~/.emacs.d/lisp/eval-in-repl-init.el
 
 # Markdown
 fresh bin/Markdown.pl --file=~/bin/Markdown.pl
