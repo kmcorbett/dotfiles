@@ -13,12 +13,15 @@ umask 002
 alias l="ls -lFh"
 
 # Clojure
+alias leincc="lein clean && lein compile && lein test"
 inclj() { find . -name '*.clj' -exec grep -nHr "$1" {} \; ; } 
 lsclj() { find . -name .git -prune -o -name '*.clj' -print ; }
 
 # Antlr4
-#alias antlr4='java -jar /usr/local/lib/antlr-4.4-complete.jar'
-#alias grun='java org.antlr.v4.runtime.misc.TestRig'
+if [ -f /usr/local/lib/antlr-4.4-complete.jar ]; then
+  alias antlr4='java -jar /usr/local/lib/antlr-4.4-complete.jar'
+  alias grun='java org.antlr.v4.runtime.misc.TestRig'
+fi
 
 alias l="ls -lAF"
 

@@ -62,7 +62,7 @@
   ;; default font size (point * 10)
   ;; WARNING!  Depending on the default font,
   ;; if the size is not supported very well, the frame will be clipped
-  ;; so that the beginning of the buffer may not be visible correctly. 
+  ;; so that the beginning of the buffer may not be visible correctly.
   (set-face-attribute 'default nil :height 165)
   ;; if you want to use different font size for specific charset,
   ;; add :size POINT-SIZE in the font-spec.
@@ -104,7 +104,7 @@
 
 ;;; Packages I use
 
-(defvar my-packages-list 
+(defvar my-packages-list
   '(cl-lib
     auto-complete
     color-theme
@@ -114,7 +114,7 @@
     clojure-mode cider
     haskell-mode scala-mode go-mode))
 
-;; Use Melpa package repo 
+;; Use Melpa package repo
 (setq package-user-dir "~/.emacs.d/elpa/")
 (package-initialize)
 
@@ -201,8 +201,8 @@
 ;;; Dash
 (autoload 'dash-at-point "dash-at-point"
           "Search the word at point with Dash." t nil)
-(global-set-key "\C-cd" 'dash-at-point)
-(global-set-key "\C-ce" 'dash-at-point-with-docset)
+(global-set-key [(C c) C d] 'dash-at-point)
+(global-set-key [(C u) (C c) (C d) d] 'dash-at-point-with-docset)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modes and Hooks
@@ -261,15 +261,15 @@
 
 ;;change default browser for 'browse-url'  to w3m
 (setq browse-url-browser-function 'w3m-goto-url-new-session)
- 
+
 ;;change w3m user-agent to android
 (setq w3m-user-agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.")
- 
+
 ;;quick access hacker news
 ;; (defun hn ()
 ;;   (interactive)
 ;;   (browse-url "http://news.ycombinator.com"))
- 
+
 ;; ;;quick access reddit
 ;; (defun reddit (reddit)
 ;;   "Opens the REDDIT in w3m-new-session"
@@ -277,7 +277,7 @@
 ;;                 (read-string "Enter the reddit (default: psycology): " nil nil "psychology" nil)))
 ;;   (browse-url (format "http://m.reddit.com/r/%s" reddit))
 ;;   )
- 
+
 ;; TODO: Do I need this?
 (defun wikipedia-search (search-term)
   "Search for SEARCH-TERM on wikipedia"
@@ -295,7 +295,7 @@
     search-term
     ))
   )
- 
+
 ;;when I want to enter the web address all by hand
 (defvar my-w3m-last-site "google.com")
 (defun w3m-open-site (site)

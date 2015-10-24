@@ -12,6 +12,7 @@
   br = branch
   ci = commit
   co = checkout
+  lol = "log --graph --oneline --decorate"
   st = status
 [core]
 	autocrlf = input
