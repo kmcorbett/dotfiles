@@ -2,7 +2,7 @@
 	name = "Keith M Corbett"
 	email = "kmcorbett@gmail.com"
 [format]
-	pretty = %h, %s <%ae>
+	pretty = %h|%ar|%s <%ae>
 [push]
 	default = tracking
 [github]
@@ -12,7 +12,7 @@
   br = branch
   ci = commit
   co = checkout
-  lol = "log --graph --decorate --pretty='%h, %s <%ae>'"
+  lol = "log --graph --decorate --pretty='%h|%ar|%s <%ae>'"
   st = status
 [core]
 	autocrlf = input
