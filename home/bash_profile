@@ -28,7 +28,7 @@ set filec
 
 # Shell
 export PS1="\h:\W\n\u\$ "
-export EDITOR=emacs
+export EDITOR=emacsclient
 export ALTERNATE_EDITOR=
 export NAME="Keith M Corbett"
 
