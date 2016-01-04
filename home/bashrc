@@ -19,6 +19,7 @@ lsclj() { find . -name .git -prune -o -name '*.clj' -print ; }
 
 # Git
 alias lol="git lol -n"
+alias gdiff="git diff > diffs.patch"
 
 # Antlr4
 if [ -f /usr/local/lib/antlr-4.4-complete.jar ]; then
