@@ -13,9 +13,12 @@ umask 002
 alias l="ls -lFh"
 
 # Clojure
-alias leincc="lein clean && lein compile && lein test"
+alias leincc="lein clean && lein compile && lein cljsbuild once"
 inclj() { find . -name '*.clj' -exec grep -nHr "$1" {} \; ; } 
 lsclj() { find . -name .git -prune -o -name '*.clj' -print ; }
+
+# Git
+alias lol="git lol -n"
 
 # Antlr4
 if [ -f /usr/local/lib/antlr-4.4-complete.jar ]; then
