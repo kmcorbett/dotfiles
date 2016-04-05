@@ -31,6 +31,7 @@ fi
 # see URL: http://stuff-things.net/2015/10/13/building-emacs-on-os-x-el-capitan/
 if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
   alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+  alias emacsclient=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
 fi
 
 alias l="ls -lAF"
