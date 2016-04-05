@@ -20,3 +20,6 @@ export M2=$M2_HOME/bin
 # CCL
 export CCL_DEFAULT_DIRECTORY=$HOME/Tools/ccl
 export PATH=${PATH}:${CCL_DEFAULT_DIRECTORY}/scripts
+
+# Emacs
+export EDITOR=emacs

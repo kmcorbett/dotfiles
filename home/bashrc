@@ -27,6 +27,12 @@ if [ -f /usr/local/lib/antlr-4.4-complete.jar ]; then
   alias grun='java org.antlr.v4.runtime.misc.TestRig'
 fi
 
+# Emacs 25 (NextStep)
+# see URL: http://stuff-things.net/2015/10/13/building-emacs-on-os-x-el-capitan/
+if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
+  alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+fi
+
 alias l="ls -lAF"
 
 if [ -f ~/.bash_aliases ]; then
