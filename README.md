@@ -7,10 +7,6 @@ directory. In other words, we assume here that the user has used "cd"
 to set their working directory to the default (per-user) home
 directory path.
 
-### Environment
-
-    export TMPDIR="~/tmp"
-
 ### Archive un-fresh files
 
 The "fresh" command may complain if you attempt to freshen a file that
@@ -21,12 +17,12 @@ already exists and is not a link to the fresh source file.
 
 ### Fresh sources from Github
 
-    git clone git@github.com:kmcorbett/dotfiles.git .dotfiles
+    git clone <URL for origin> .dotfiles
 
 ### Freshen for the first time
 
     bash -c "`curl -sL --insecure get.freshshell.com`"
-    ln -s ~/.dotfiles/freshrc ~/.freshrc
+    ln -s ~/.dotfiles/freshrc ~/.freshrc  # may not be needed?
     fresh
 
 ## Freshen dotfiles 2nd and future times
@@ -52,7 +48,7 @@ there are no local uncommitted changes.
 ### Fresh Emacs
 
 My Emacs dotfiles expect to run in Emacs 24 or later. Follow
-instructions for updating Emacs here: 
+instructions for updating Emacs here:
 [https://launchpad.net/~cassou/+archive/emacs](https://launchpad.net/~cassou/+archive/emacs)
 
 To install various dependencies (used by emacs-init.el)
@@ -67,7 +63,7 @@ Configure ccl initialization in home/bash_profile.<hostname>
     svn co http://svn.clozure.com/publicsvn/openmcl/release/1.10/darwinx86/ccl
     cd ccl
     ./scripts/ccl -n
-    ? (ccl:rebuild-full :full t)    
+    ? (ccl:rebuild-full :full t)
 
 ### Fresh Common Lisp using QuickLisp
 
@@ -81,7 +77,7 @@ Next time:
 
     ccl
     ? (load "~/quicklisp/setup.lisp")
-    
+
 ### Post-freshen fix file modes (if needed)
 
     chmod +x ~/bin/Markdown.pl
