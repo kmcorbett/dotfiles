@@ -1,8 +1,5 @@
 # .bash_profile.local
 
-# Identity
-export EMAIL="kcorbett@nevo.com"
-
 # Java
 export JAVA_HOME=/opt/jdk1.7.0_60
 export JRE_HOME=${JAVA_HOME}/jre
