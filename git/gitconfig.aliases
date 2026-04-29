@@ -1,0 +1,154 @@
+# -*- mode: gitconfig; indent-tabs-mode: nil; tab-width: 4; fill-column: 132 -*-
+
+[alias]
+
+    alias = config --get-regexp alias
+
+    ###
+    ### Established workflows
+    ###
+
+    # Most commonly used
+    co = checkout
+    st = status
+    br = branch
+    ci = commit
+    df = diff
+
+    last = log -1 HEAD
+    amend = commit --amend --no-edit
+
+    # Unstage files without discarding changes
+    unstage = reset HEAD --
+
+    # Log formats
+    lgo = log --graph --oneline --decorate --all
+    # `git lgg` shows a graph with one‑line commits, coloured hash and refs, message, relative time and author
+    lgg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lggg = log --pretty=format:'%C(auto)%h %C(blue)%an%C(auto)%d %C(reset)%s' --graph
+    lp = log --pretty=format:'%C(auto)%h %C(blue)%an%C(auto)%d %C(reset)%s' --graph --date=short --all
+
+    ###
+    ### New recommended workflows
+    ###
+
+    # Switch to main, update via rebase, return to prior branch
+    refresh = "!f() { b=$(git symbolic-ref --short HEAD); git checkout main && git pull --rebase --autostash && git checkout \"$b\"; }; f"
+    
+    # Update branch using fetch + rebase + autostash (daily driver)
+    up = pull --rebase --autostash
+
+    # Deterministic safe rebase onto latest origin/main
+    rb = "!git fetch origin && git rebase origin/main"
+
+    # Interactive cleanup/squash relative to origin/main
+    squash = rebase -i origin/main
+
+    # Abort an in-progress rebase
+    abort = rebase --abort
+
+    # Continue an interrupted rebase
+    cont = rebase --continue
+
+    # Skip current patch during rebase
+    skip = rebase --skip
+
+    # Create timestamped safety backup branch
+    panic = "!git branch backup/$(date +%Y%m%d-%H%M%S)"
+
+    # Show reflog for recovery / lost commit rescue
+    undo = reflog
+
+    # Compact visual commit graph across all branches
+    lg = log --oneline --graph --decorate --all
+
+    # List files currently in conflict state
+    conflicts = diff --name-only --diff-filter=U
+
+    # Quick checkpoint commit for work-in-progress
+    wip = "!git add -A && git commit -m 'WIP'"
+
+    # Safe force push using lease protection
+    pf = push --force-with-lease
+
+    #### CONFLICT RESOLUTION SHORTCUTS ####
+
+    # Accept current branch version of a conflicted file
+    ours = checkout --ours --
+
+    # Accept incoming branch version of a conflicted file
+    theirs = checkout --theirs --
+
+    # Accept ours for all conflicts
+    ours-all = "!git checkout --ours . && git add -A"
+
+    # Accept theirs for all conflicts
+    theirs-all = "!git checkout --theirs . && git add -A"
+
+    # Launch mergetool for manual conflict resolution
+    mt = mergetool
+
+    # Show unresolved conflict markers
+    conflict-markers = "!grep -R \"<<<<<<<\" -n ."
+
+
+    #### STASH WORKFLOW HELPERS ####
+
+    # Save stash with descriptive message
+    stash-save = stash push -m
+
+    # List stashes with readable format
+    stash-list = stash list
+
+    # Show contents of most recent stash
+    stash-show = stash show -p
+
+    # Apply most recent stash without dropping it
+    stash-apply = stash apply
+
+    # Apply and remove most recent stash
+    stash-pop = stash pop
+
+    # Drop most recent stash
+    stash-drop = stash drop
+
+    # Clear all stashes
+    stash-clear = stash clear
+
+
+    #### BRANCH HYGIENE HELPERS ####
+
+    # List local branches with last commit date
+    branches = branch -vv
+
+    # Delete fully merged branches (safe cleanup)
+    prune-local = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    # Delete merged remote branches
+    prune-remote = "!git fetch -p"
+
+    # Rename current branch
+    rename = branch -m
+
+    # Show merge-base against main
+    base = "!git merge-base HEAD origin/main"
+
+    #### STACKED PR / ADVANCED WORKFLOW ####
+
+    # Rebase onto main but preserve merge commits if present
+    rbm = "!git fetch origin && git rebase --rebase-merges origin/main"
+
+    # Rebase onto specific branch
+    rbo = rebase --onto
+
+    # Show commits not yet in main
+    pending = log origin/main..HEAD --oneline
+
+    # Show commits unique to branch with graph
+    pending-graph = log origin/main..HEAD --oneline --graph
+
+    # Compare branch against main
+    diff-main = diff origin/main...
+
+    # Show what will be pushed
+    push-preview = log @{u}..HEAD --oneline

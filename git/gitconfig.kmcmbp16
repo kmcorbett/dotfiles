@@ -1,0 +1,32 @@
+# -*- mode: gitconfig; indent-tabs-mode: nil; tab-width: 4; fill-column: 132 -*-
+
+# This is Git's per-user configuration file.
+
+[user]
+	name = Keith M Corbett
+    email = keith.corbett@intuitive.ai
+
+[format]
+    # Always use the one‑line format when running `git log`
+    # (you can replace "oneline" with a custom format string if you prefer)
+    # sets the default pretty format for log/show/whatchanged [oai_citation:0‡willi.am](https://willi.am/blog/2015/02/19/customize-your-git-log-format/#:~:text=If%20you%20want%20to%20make,so%20with%20the%20following%20command)
+    pretty = "%ci %h %al %s"
+
+[include]
+    path = ~/.gitconfig.aliases
+
+[core]
+    autocrlf = input
+    excludesfile = ~/.config/git/ignore
+
+[credential]
+    helper = osxkeychain
+
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+
+[push]
+    autoSetupRemote = true

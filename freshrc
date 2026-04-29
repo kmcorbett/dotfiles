@@ -4,23 +4,14 @@
 # Update fresh itself
 fresh freshshell/fresh bin/fresh --bin
 
-# Bash inits
-fresh home/bashrc --file
-fresh home/bash_profile --file
-
-# Optional per-host local bash profile
-fresh-options --file=~/.bash_profile.local
-  fresh home/bash_profile.$(hostname -s) --ignore-missing
-fresh-options
+# Zsh inits
+fresh home/zshrc --file=~/.zshrc
+fresh home/zprofile --file=~/.zprofile
 
 fresh home/signature --file
-fresh home/tmux.conf --file
+fresh home/tmux.conf --file=~/.tmux.conf
 
 fresh ssh-config --file=~/.ssh/config-example
-
-# CCL
-fresh ccl-init.lisp --file
-fresh quicklisp-init.lisp --file=~/.ccl-init/quicklisp-init.lisp
 
 # Emacs
 # fresh emacs/init.el --file=~/.emacs.d/init.el
@@ -29,25 +20,12 @@ fresh quicklisp-init.lisp --file=~/.ccl-init/quicklisp-init.lisp
 # Markdown
 fresh bin/Markdown.pl --file=~/bin/Markdown.pl
 
-# Git 
-# Some global git config settings vary per host
-fresh-options --file=~/.gitconfig
-  fresh git/gitconfig
-  fresh git/gitconfig.$(hostname -s) --ignore-missing
-  # Uncomment this for Nevo
-  # TODO: local scripts for per-site settings
-  # fresh git/gitconfig.nevo --ignore-missing
-fresh-options
+# Starship prompt
+fresh config/starship.toml --file=~/.config/starship.toml
 
-# Oracle
-# Uncomment as needed
-# fresh-options --file=~/.tnsnames/tnsnames.ora
-#   fresh oracle/tnsnames.ora.$(hostname -s) --ignore-missing
-# fresh-options
-
-# Verisk inits
-#fresh measuresengine/dtinit --file=~/.dtinit
-#fresh measuresengine/tunnel2code.sh --file=~/bin/tunnel2code.sh
+# Git — machine-specific gitconfig + shared aliases
+fresh git/gitconfig.$(hostname -s) --file=~/.gitconfig --ignore-missing
+fresh git/gitconfig.aliases --file=~/.gitconfig.aliases
 
 fresh_after_build() {
     chmod +x ~/bin/Markdown.pl

@@ -1,0 +1,64 @@
+# .zshrc
+
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+# History
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# Pager
+export PAGER="less"
+export LESS="-R --quit-if-one-screen"
+export MANPAGER="less -X"
+
+# Shell ergonomics
+setopt AUTO_CD
+setopt CORRECT
+#setopt NO_BEEP
+
+_emacs_bin="/Applications/Emacs.app/Contents/MacOS/Emacs"
+if [ -f "$_emacs_bin" ]; then
+  alias emacs="emacsclient -n"
+  alias emacs-gui="$_emacs_bin"
+  export EDITOR=emacsclient
+fi
+
+# Other aliases
+alias l="ls -lAF"
+
+# Claude Code
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS_TOOL_USE=1
+#export CLAUDE_API_KEY=$(cat ~/.claude_api_key)
+
+# terminal
+#PS1='%n@%m:%3~$ '
+
+# Zsh completions
+local _completions="$HOME/Code/intuitivetp/dadakh2/semantixiq/bin/completions"
+[[ -d "$_completions" ]] && fpath=("$_completions" $fpath)
+autoload -Uz compinit && compinit
+
+eval "$(starship init zsh)"
+
+# Claude project memory sync (MacBook = source of truth)
+# push: shared memories + skills → studio; pull: studio backlog only ← studio
+alias memory-push='rsync -av --exclude=project_task_backlog_studio.md ~/.claude/projects/-Users-kmcorbett-Code-intuitivetp-dadakh2/memory/ keithmcorbett@kmcstudio.local:/Users/keithmcorbett/.claude/projects/-Users-keithmcorbett-Code-intuitivetp-dadakh2/memory/ && rsync -av ~/.claude/skills/ keithmcorbett@kmcstudio.local:/Users/keithmcorbett/.claude/skills/'
+alias memory-pull='rsync -av keithmcorbett@kmcstudio.local:/Users/keithmcorbett/.claude/projects/-Users-keithmcorbett-Code-intuitivetp-dadakh2/memory/project_task_backlog_studio.md ~/.claude/projects/-Users-kmcorbett-Code-intuitivetp-dadakh2/memory/'
+alias memory-sync='memory-pull && memory-push'
+alias memory-cat-local='cat ~/.claude/projects/-Users-kmcorbett-Code-intuitivetp-dadakh2/memory/project_task_backlog.md'
+alias memory-cat-remote='ssh keithmcorbett@kmcstudio.local cat /Users/keithmcorbett/.claude/projects/-Users-keithmcorbett-Code-intuitivetp-dadakh2/memory/project_task_backlog_studio.md'
+
+# SDKMAN — lazy load to keep startup fast
+export SDKMAN_DIR="$HOME/.sdkman"
+export PATH="$SDKMAN_DIR/candidates/java/current/bin:$SDKMAN_DIR/candidates/maven/current/bin:$PATH"
+sdk() {
+  unfunction sdk 2>/dev/null
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+  sdk "$@"
+}

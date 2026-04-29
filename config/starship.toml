@@ -1,0 +1,25 @@
+[python]
+symbol = "🐍 "
+format = '[$symbol$version]($style) '
+style = "yellow bold"
+
+[nodejs]
+symbol = "⬢ "
+format = '[$symbol$version]($style) '
+style = "green bold"
+
+[java]
+symbol = "☕ "
+format = '[$symbol$version]($style) '
+style = "red bold"
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+
+[custom.pr]
+description = "Current branch PR number"
+command = "gh pr view --json number -q '\"#\" + (.number | tostring)' 2>/dev/null"
+when = "git rev-parse --is-inside-work-tree 2>/dev/null"
+style = "bold cyan"
+format = "[$output]($style) "
