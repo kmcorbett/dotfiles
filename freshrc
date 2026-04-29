@@ -11,10 +11,10 @@ fresh home/zprofile --file=~/.zprofile
 fresh home/signature --file
 fresh home/tmux.conf --file=~/.tmux.conf
 
-fresh ssh-config --file=~/.ssh/config-example
+fresh ssh-config --file=~/.ssh/config
 
 # Emacs
-# fresh emacs/init.el --file=~/.emacs.d/init.el
+fresh emacs/init.el --file=~/.emacs.d/init.el
 # fresh emacs/eval-in-repl-init.el --file=~/.emacs.d/lisp/eval-in-repl-init.el
 
 # Markdown

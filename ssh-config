@@ -1,7 +1,21 @@
+# Personal GitHub
 Host github.com
-     user git
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
 
-Host ps76923.dreamhost.com
-     user kmcorbett
+# IntuitiveAI GitHub
+Host github-intuitiveai
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_intuitiveai
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
 
-Host *
+# Optional: 1Password SSH agent (leave commented unless you intend to use it)
+# Host *
+#   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
