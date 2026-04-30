@@ -44,7 +44,7 @@ local _completions="$HOME/Code/intuitivetp/dadakh2/semantixiq/bin/completions"
 [[ -d "$_completions" ]] && fpath=("$_completions" $fpath)
 autoload -Uz compinit && compinit
 
-eval "$(starship init zsh)"
+[[ "$TERM" != "dumb" ]] && eval "$(starship init zsh)"
 
 # Claude project memory sync (MacBook = source of truth)
 # push: shared memories + skills → studio; pull: studio backlog only ← studio
