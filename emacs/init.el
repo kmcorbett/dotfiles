@@ -22,9 +22,12 @@
 (setenv "GIT_PAGER" "cat")
 (setenv "EDITOR" "emacsclient")
 
-;;; Bash profile for shell-mode
-;; (when (file-exists-p "~/.bash_profile")
-;;   (setq explicit-bash-args '("--login" "--init-file" "~/.bash_profile" "-i")))
+;;; Shell — simple prompt for dumb terminal, last 2 directory levels
+(defun my/shell-simple-prompt ()
+  (when-let ((proc (get-buffer-process (current-buffer))))
+    (comint-send-string proc "PS1='%2~ $ '\n")))
+(add-hook 'shell-mode-hook #'my/shell-simple-prompt)
+(setq shell-prompt-pattern "^.+ \\$ ")
 
 ;;; PATH setup - don't count on Mac OS X to get the same PATH as terminal apps
 (let ((my-bin (expand-file-name "~/bin")))
