@@ -54,6 +54,11 @@ alias memory-sync='memory-pull && memory-push'
 alias memory-cat-local='cat ~/.claude/projects/-Users-kmcorbett-Code-intuitivetp-dadakh2/memory/project_task_backlog.md'
 alias memory-cat-remote='ssh keithmcorbett@kmcstudio.local cat /Users/keithmcorbett/.claude/projects/-Users-keithmcorbett-Code-intuitivetp-dadakh2/memory/project_task_backlog_studio.md'
 
+# ssh hosts
+alias ssh-openmetadata-old="ssh -i $HOME/.ssh/pemfiles/DA-ACCL.pem ubuntu@44.219.68.84"
+alias ssh-openmetadata="ssh -i $HOME/.ssh/pemfiles/jindaldemopoc2.pem ubuntu@52.72.208.7"
+alias ssh-semantixiq-dev='ssh -t kmcstudio "cd ~/Code/intuitivetp/SemantixIQ && exec \$SHELL -l"'
+
 # SDKMAN — lazy load to keep startup fast
 export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$SDKMAN_DIR/candidates/java/current/bin:$SDKMAN_DIR/candidates/maven/current/bin:$PATH"
