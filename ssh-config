@@ -1,17 +1,35 @@
+# Mac Studio
+Host kmcstudio
+  HostName kmcstudio.local
+  User keithmcorbett
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
+
+# Intuitive GitHub Enterprise
+Host github-ghe
+  HostName intuitive-technology-partners-inc.ghe.com
+  User intuitive-technology-partners-inc
+  IdentityFile ~/.ssh/id_ed25519_ghe
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
+
+# IntuitiveAI GitHub (old)
+Host github-intuitiveai
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_intuitiveai
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
+
 # Personal GitHub
 Host github.com
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_ed25519
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentitiesOnly yes
-
-# IntuitiveAI GitHub
-Host github-intuitiveai
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519_intuitiveai
   AddKeysToAgent yes
   UseKeychain yes
   IdentitiesOnly yes
